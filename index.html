@@ -40,6 +40,14 @@
   .ab-bearish { background: rgba(255,60,60,0.12); border: 1px solid rgba(255,60,60,0.25); color: #f0b0b0; }
   .alert-bubble code { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; }
 
+  .msg-bubble { padding: 14px 16px; border-radius: 12px; background: rgba(0,212,170,0.06); border: 1px solid rgba(0,212,170,0.15); font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 12.5px; line-height: 1.8; word-wrap: break-word; color: #c8d6e5; }
+
+  .msg-bubble code { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; background: rgba(0,212,170,0.1); padding: 1px 5px; border-radius: 3px; font-size: 12px; }
+
+  .cmd-bubble { padding: 14px 16px; border-radius: 12px; background: rgba(0,150,255,0.06); border: 1px solid rgba(0,150,255,0.15); font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 12.5px; line-height: 1.8; word-wrap: break-word; color: #b0c4d8; }
+
+  .cmd-bubble code { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; background: rgba(0,150,255,0.12); padding: 1px 5px; border-radius: 3px; font-size: 12px; }
+
   /* Dots */
   .dots { display: flex; justify-content: center; gap: 7px; margin-top: 14px; }
   .dot { width: 7px; height: 7px; border-radius: 50%; background: #333; cursor: pointer; transition: all 0.25s; }
@@ -53,6 +61,7 @@
 
   /* ===== LEGEND BELOW CAROUSEL ===== */
   .slide-legend { text-align: center; padding: 10px 12px 0; }
+  .slide-group { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #00d4aa; margin-bottom: 2px; font-weight: 700; }
   .slide-title { font-size: 13px; font-weight: 700; color: #ccc; }
   .slide-desc { font-size: 11px; color: #666; margin-top: 3px; line-height: 1.5; }
 
@@ -115,7 +124,42 @@
 
     <div class="carousel" id="carousel">
 
-      <!-- Slide 1: Price Alert Above -->
+      <!-- ═══════════════════════════════════════ -->
+      <!-- GROUP 1: ON-DEMAND CHECK               -->
+      <!-- ═══════════════════════════════════════ -->
+
+      <!-- Slide 1: /check command — oversold + volume -->
+      <div class="slide">
+        <div class="telegram-frame">
+          <div class="telegram-header">
+            <div class="avatar">🦅</div>
+            <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
+          </div>
+          <div class="chat-area">
+<div class="msg-bubble">
+📊  <b>Daily Report — BTC</b><br>
+━━━━━━━━━━━━━━━━━━━━<br><br>
+💰  Price: <code>$92,000.00</code><br>
+📅  Date: <code>2026-06-02</code><br>
+📈  Change: <code>-6.12%</code> 🔴<br><br>
+<b>Market Status:</b><br><br>
+<b>🟢 RSI: 26.4 (Oversold)</b><br>
+&nbsp;&nbsp;Below 30 — buying pressure exhausted; price could bounce.<br><br>
+<b>🔥 Volume: High (+63%)</b><br>
+&nbsp;&nbsp;Unusually strong bullish participation.<br>
+Signal Strength: 🟢 Bullish (1 bull / 0 bear)<br>
+━━━━━━━━━━━━━━━━━━━━<br>
+⚠️  <i>Not financial advice. Data only.</i>
+</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════ -->
+      <!-- GROUP 2: INDIVIDUAL ALERTS             -->
+      <!-- ═══════════════════════════════════════ -->
+
+      <!-- Slide 2: Price alert -->
       <div class="slide">
         <div class="telegram-frame">
           <div class="telegram-header">
@@ -134,26 +178,7 @@ Price broke above your set threshold.
         </div>
       </div>
 
-      <!-- Slide 2: Price Alert Below -->
-      <div class="slide">
-        <div class="telegram-frame">
-          <div class="telegram-header">
-            <div class="avatar">🦅</div>
-            <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
-          </div>
-          <div class="chat-area">
-<div class="alert-bubble ab-below">
-🚨  <b>PRICE ALERT</b><br>
-━━━━━━━━━━━━━━━━━━━━<br><br>
-BTCUSDT below <code>$95,000.00</code><br>
-Current: <code>$94,340.20</code><br>
-Price dropped below your set threshold.
-</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 3: Volume Spike -->
+      <!-- Slide 3: Volume spike -->
       <div class="slide">
         <div class="telegram-frame">
           <div class="telegram-header">
@@ -164,34 +189,15 @@ Price dropped below your set threshold.
 <div class="alert-bubble ab-volume">
 🔥  <b>VOLUME SPIKE</b><br>
 ━━━━━━━━━━━━━━━━━━━━<br><br>
-  BTCUSDT<br>
-  Volume: +87% vs 20d avg<br>
-  Trading activity is moderately above average.
+&nbsp;&nbsp;BTCUSDT<br>
+&nbsp;&nbsp;Volume: +87% vs 20d avg<br>
+&nbsp;&nbsp;Trading activity is moderately above average.
 </div>
           </div>
         </div>
       </div>
 
-      <!-- Slide 4: RSI Overbought -->
-      <div class="slide">
-        <div class="telegram-frame">
-          <div class="telegram-header">
-            <div class="avatar">🦅</div>
-            <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
-          </div>
-          <div class="chat-area">
-<div class="alert-bubble ab-rsi-high">
-🔴  <b>RSI OVERBOUGHT</b><br>
-━━━━━━━━━━━━━━━━━━━━<br><br>
-  ETHUSDT RSI: <code>82.4</code><br>
-  Price: <code>$3,842.50</code><br>
-  Above 70 — selling pressure building; price may pull back.
-</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 5: RSI Oversold -->
+      <!-- Slide 4: RSI oversold -->
       <div class="slide">
         <div class="telegram-frame">
           <div class="telegram-header">
@@ -202,15 +208,34 @@ Price dropped below your set threshold.
 <div class="alert-bubble ab-rsi-low">
 🟢  <b>RSI OVERSOLD</b><br>
 ━━━━━━━━━━━━━━━━━━━━<br><br>
-  BTCUSDT RSI: <code>24.1</code><br>
-  Price: <code>$91,200.00</code><br>
-  Below 30 — buying pressure exhausted; price could bounce.
+&nbsp;&nbsp;BTCUSDT RSI: <code>24.1</code><br>
+&nbsp;&nbsp;Price: <code>$91,200.00</code><br>
+&nbsp;&nbsp;Below 30 — buying pressure exhausted; price could bounce.
 </div>
           </div>
         </div>
       </div>
 
-      <!-- Slide 6: BB Upper -->
+      <!-- Slide 5: RSI overbought -->
+      <div class="slide">
+        <div class="telegram-frame">
+          <div class="telegram-header">
+            <div class="avatar">🦅</div>
+            <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
+          </div>
+          <div class="chat-area">
+<div class="alert-bubble ab-rsi-high">
+🔴  <b>RSI OVERBOUGHT</b><br>
+━━━━━━━━━━━━━━━━━━━━<br><br>
+&nbsp;&nbsp;ETHUSDT RSI: <code>82.4</code><br>
+&nbsp;&nbsp;Price: <code>$3,842.50</code><br>
+&nbsp;&nbsp;Above 70 — selling pressure building; price may pull back.
+</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 6: Bollinger upper -->
       <div class="slide">
         <div class="telegram-frame">
           <div class="telegram-header">
@@ -221,15 +246,15 @@ Price dropped below your set threshold.
 <div class="alert-bubble ab-bb-upper">
 📐  <b>BB UPPER</b><br>
 ━━━━━━━━━━━━━━━━━━━━<br><br>
-  BTCUSDT<br>
-  Price ≥ Upper: <code>$121,400.00</code><br>
-  Market may be overextended upward — watch for pullback.
+&nbsp;&nbsp;BTCUSDT<br>
+&nbsp;&nbsp;Price ≥ Upper: <code>$121,400.00</code><br>
+&nbsp;&nbsp;Market may be overextended upward — watch for pullback.
 </div>
           </div>
         </div>
       </div>
 
-      <!-- Slide 7: BB Lower -->
+      <!-- Slide 7: Bollinger lower -->
       <div class="slide">
         <div class="telegram-frame">
           <div class="telegram-header">
@@ -240,15 +265,15 @@ Price dropped below your set threshold.
 <div class="alert-bubble ab-bb-lower">
 📐  <b>BB LOWER</b><br>
 ━━━━━━━━━━━━━━━━━━━━<br><br>
-  BTCUSDT<br>
-  Price ≤ Lower: <code>$88,600.00</code><br>
-  Market may be oversold — watch for bounce.
+&nbsp;&nbsp;BTCUSDT<br>
+&nbsp;&nbsp;Price ≤ Lower: <code>$88,600.00</code><br>
+&nbsp;&nbsp;Market may be oversold — watch for bounce.
 </div>
           </div>
         </div>
       </div>
 
-      <!-- Slide 8: Bullish Cross -->
+      <!-- Slide 8: Bullish MA cross -->
       <div class="slide">
         <div class="telegram-frame">
           <div class="telegram-header">
@@ -259,15 +284,15 @@ Price dropped below your set threshold.
 <div class="alert-bubble ab-bullish">
 🟢  <b>BULLISH CROSS</b><br>
 ━━━━━━━━━━━━━━━━━━━━<br><br>
-  ETHUSDT: EMA 9 &gt; EMA 21<br>
-  EMA 9: <code>$3,820.40</code> | EMA 21: <code>$3,798.10</code><br>
-  Crossed above — upward momentum building.
+&nbsp;&nbsp;ETHUSDT: EMA 9 &gt; EMA 21<br>
+&nbsp;&nbsp;EMA 9: <code>$3,820.40</code> | EMA 21: <code>$3,798.10</code><br>
+&nbsp;&nbsp;Short-term crossed above — upward momentum building.
 </div>
           </div>
         </div>
       </div>
 
-      <!-- Slide 9: Bearish Cross -->
+      <!-- Slide 9: Bearish MA cross -->
       <div class="slide">
         <div class="telegram-frame">
           <div class="telegram-header">
@@ -278,9 +303,160 @@ Price dropped below your set threshold.
 <div class="alert-bubble ab-bearish">
 🔴  <b>BEARISH CROSS</b><br>
 ━━━━━━━━━━━━━━━━━━━━<br><br>
-  BTCUSDT: EMA 9 &lt; EMA 21<br>
-  EMA 9: <code>$104,200.00</code> | EMA 21: <code>$105,100.00</code><br>
-  Crossed below — downward momentum building.
+&nbsp;&nbsp;BTCUSDT: EMA 9 &lt; EMA 21<br>
+&nbsp;&nbsp;EMA 9: <code>$104,200.00</code> | EMA 21: <code>$105,100.00</code><br>
+&nbsp;&nbsp;Short-term crossed below — downward momentum building.
+</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════ -->
+      <!-- GROUP 3: MULTI-ALERT RECAP             -->
+      <!-- ═══════════════════════════════════════ -->
+
+      <!-- Slide 10: Daily Recap (3+ alerts triggered) -->
+      <div class="slide">
+        <div class="telegram-frame">
+          <div class="telegram-header">
+            <div class="avatar">🦅</div>
+            <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
+          </div>
+          <div class="chat-area">
+<div class="msg-bubble">
+📊  <b>Daily Recap — BTCUSDT</b><br>
+━━━━━━━━━━━━━━━━━━━━<br><br>
+📅  Date: <code>2026-06-02</code><br><br>
+<b>Market Status:</b><br><br>
+<b>🟢 RSI: Oversold (24.1)</b><br>
+&nbsp;&nbsp;Below 30 — buying pressure exhausted; price could bounce.<br><br>
+<b>🔥 Volume Spike (+87%)</b><br>
+&nbsp;&nbsp;Trading activity is moderately above average.<br><br>
+<b>📐 Bollinger: Lower Band</b><br>
+&nbsp;&nbsp;Price ≤ Lower: <code>$88,600.00</code><br>
+&nbsp;&nbsp;Market may be oversold — watch for bounce.<br><br>
+Signal Strength: 🟢 Bullish (2 bull / 0 bear)<br>
+━━━━━━━━━━━━━━━━━━━━<br>
+⚠️  <i>Not financial advice. Data only.</i>
+</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════ -->
+      <!-- GROUP 4: SETUP COMMANDS                -->
+      <!-- ═══════════════════════════════════════ -->
+
+      <!-- Slide 11: /setprice confirmation -->
+      <div class="slide">
+        <div class="telegram-frame">
+          <div class="telegram-header">
+            <div class="avatar">🦅</div>
+            <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
+          </div>
+          <div class="chat-area">
+<div class="cmd-bubble">
+✅&ensp; Price alert: BTCUSDT<br>
+&nbsp;&nbsp;&ensp; Above: <code>$100,000.00</code><br>
+&nbsp;&nbsp;&ensp; Below: <code>$85,000.00</code>
+</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 12: /setvolume confirmation -->
+      <div class="slide">
+        <div class="telegram-frame">
+          <div class="telegram-header">
+            <div class="avatar">🦅</div>
+            <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
+          </div>
+          <div class="chat-area">
+<div class="cmd-bubble">
+✅&ensp; Volume alert: BTCUSDT<br>
+&nbsp;&nbsp;&ensp; &gt;30% vs 20d avg
+</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 13: /setrsi confirmation -->
+      <div class="slide">
+        <div class="telegram-frame">
+          <div class="telegram-header">
+            <div class="avatar">🦅</div>
+            <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
+          </div>
+          <div class="chat-area">
+<div class="cmd-bubble">
+✅&ensp; RSI alert: ETHUSDT<br>
+&nbsp;&nbsp;&ensp; High: 75  Low: 25
+</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 14: /mysettings -->
+      <div class="slide">
+        <div class="telegram-frame">
+          <div class="telegram-header">
+            <div class="avatar">🦅</div>
+            <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
+          </div>
+          <div class="chat-area">
+<div class="cmd-bubble">
+⚙️&ensp; <b>Active Alerts</b><br>
+━━━━━━━━━━━━━━━━━━━━<br><br>
+💰&ensp; <b>Price</b><br>
+&nbsp;&nbsp;&ensp; • BTCUSDT: Above <code>$100,000</code>, Below <code>$85,000</code><br><br>
+📦&ensp; <b>Volume</b><br>
+&nbsp;&nbsp;&ensp; • BTCUSDT: &gt;30%<br>
+&nbsp;&nbsp;&ensp; • ETHUSDT: &gt;40%<br><br>
+📈&ensp; <b>RSI</b><br>
+&nbsp;&nbsp;&ensp; • ETHUSDT: High 75, Low 25<br><br>
+📐&ensp; <b>Bollinger</b><br>
+&nbsp;&nbsp;&ensp; • BTCUSDT: Band touches<br><br>
+📉&ensp; <b>MA Cross</b><br>
+&nbsp;&nbsp;&ensp; • SOLUSDT: EMA 9 × EMA 21<br>
+━━━━━━━━━━━━━━━━━━━━<br>
+<code>/remove &lt;SYM&gt;</code> to delete.
+</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════ -->
+      <!-- GROUP 5: HELP / WELCOME               -->
+      <!-- ═══════════════════════════════════════ -->
+
+      <!-- Slide 15: /help (start) -->
+      <div class="slide">
+        <div class="telegram-frame">
+          <div class="telegram-header">
+            <div class="avatar">🦅</div>
+            <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
+          </div>
+          <div class="chat-area">
+<div class="cmd-bubble" style="font-size:12px;">
+🦅&ensp; <b>Crypto Alert Bot</b><br>
+━━━━━━━━━━━━━━━━━━━━<br><br>
+📌&ensp; Daily alerts:<br>
+&nbsp;&nbsp;• 💰 Price &nbsp;• 📦 Volume spikes<br>
+&nbsp;&nbsp;• 📈 RSI &nbsp;&nbsp;&nbsp;• 📐 Bollinger Bands<br>
+&nbsp;&nbsp;• 📉 MA crossovers<br>
+━━━━━━━━━━━━━━━━━━━━<br><br>
+🔹 <b>Check</b><br>
+<code>/check &lt;SYMBOL&gt;</code> → e.g. <code>/check BTCUSDT</code><br><br>
+🔹 <b>Set Alerts</b><br>
+<code>/setprice &lt;SYM&gt; &lt;above&gt; &lt;below&gt;</code><br>
+<code>/setvolume &lt;SYM&gt; &lt;pct&gt;</code><br>
+<code>/setrsi &lt;SYM&gt; &lt;high&gt; &lt;low&gt;</code><br>
+<code>/setbb &lt;SYM&gt;</code><br>
+<code>/setmacross &lt;SYM&gt; &lt;fast&gt; &lt;slow&gt;</code><br><br>
+🔹 <b>Manage</b><br>
+<code>/mysettings</code> | <code>/remove &lt;SYM&gt;</code> | <code>/help</code><br>
+━━━━━━━━━━━━━━━━━━━━<br>
+<i>Daily • CoinGecko</i>
 </div>
           </div>
         </div>
@@ -297,6 +473,7 @@ Price dropped below your set threshold.
 
   <!-- Dynamic legend -->
   <div class="slide-legend" id="slideLegend">
+    <div class="slide-group" id="slideGroup"></div>
     <div class="slide-title" id="slideTitle"></div>
     <div class="slide-desc" id="slideDesc"></div>
   </div>
@@ -362,15 +539,21 @@ Price dropped below your set threshold.
 
 <script>
 const slidesData = [
-  { title: "🔥 Volume Spike", desc: "Detects unusual trading volume vs 20-day average. Alerts when it exceeds your threshold." },
-  { title: "🔴 RSI Overbought", desc: "Triggers when RSI crosses above your set level — signals potential selling pressure." },
-  { title: "🟢 RSI Oversold", desc: "Triggers when RSI drops below your set level — signals potential buying opportunity." },
-  { title: "🚨 Price Alert — Above", desc: "Notifies when price breaks above your threshold. Never miss a breakout." },
-  { title: "🚨 Price Alert — Below", desc: "Notifies when price drops below your threshold. Protect your positions." },
-  { title: "📐 Bollinger Upper", desc: "Alerts when price touches the upper Bollinger Band — market may be overextended." },
-  { title: "📐 Bollinger Lower", desc: "Alerts when price touches the lower Bollinger Band — market may be oversold." },
-  { title: "🟢 Bullish Crossover", desc: "Short-term MA crosses above long-term MA — upward momentum building." },
-  { title: "🔴 Bearish Crossover", desc: "Short-term MA crosses below long-term MA — downward momentum building." }
+  { group: "ON-DEMAND CHECK", title: "📊 /check BTCUSDT", desc: "Full technical report on demand — price, RSI, volume, Bollinger, MAs. With plain-English explanations." },
+  { group: "INDIVIDUAL ALERTS", title: "🚨 Price Alert", desc: "Fires when price crosses your upper or lower threshold. You set the levels." },
+  { group: "INDIVIDUAL ALERTS", title: "🔥 Volume Spike", desc: "Detects unusual trading activity vs 20-day average. Each alert explains what it means." },
+  { group: "INDIVIDUAL ALERTS", title: "🟢 RSI Oversold", desc: "RSI below 30 — buying pressure exhausted; price could bounce. Every alert has a plain-English explanation." },
+  { group: "INDIVIDUAL ALERTS", title: "🔴 RSI Overbought", desc: "RSI above 70 — selling pressure building; price may pull back. No jargon, just what it means." },
+  { group: "INDIVIDUAL ALERTS", title: "📐 Bollinger Upper", desc: "Price hits the upper band — market may be overextended. Alerts include actionable context." },
+  { group: "INDIVIDUAL ALERTS", title: "📐 Bollinger Lower", desc: "Price hits the lower band — market may be oversold. Each signal explains the opportunity." },
+  { group: "INDIVIDUAL ALERTS", title: "🟢 Bullish Crossover", desc: "Short-term MA crosses above long-term — upward momentum building." },
+  { group: "INDIVIDUAL ALERTS", title: "🔴 Bearish Crossover", desc: "Short-term MA crosses below long-term — downward momentum building." },
+  { group: "MULTI-ALERT RECAP", title: "📊 Daily Recap (3+ alerts)", desc: "When 3+ indicators fire in one day, you get a single recap instead of spam. All signals grouped with explanations." },
+  { group: "SETUP COMMANDS", title: "✅ /setprice", desc: "Set price above/below thresholds. Confirms with a clean summary." },
+  { group: "SETUP COMMANDS", title: "✅ /setvolume", desc: "Set volume spike threshold vs 20-day average." },
+  { group: "SETUP COMMANDS", title: "✅ /setrsi", desc: "Set RSI overbought/oversold levels." },
+  { group: "SETUP COMMANDS", title: "⚙️ /mysettings", desc: "View all active alerts at a glance. Organized by type." },
+  { group: "GETTING STARTED", title: "🦅 /help", desc: "Full command reference. Shows everything the bot can do." }
 ];
 
 const carousel = document.getElementById('carousel');
