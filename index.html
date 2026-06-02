@@ -3,137 +3,349 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Crypto Alert Bot — Demo</title>
+<title>Crypto Alert Bot — Smart Signal Alerts</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a0f; color: #e0e0e0; min-height: 100vh; }
-  .container { max-width: 420px; margin: 0 auto; padding: 20px; }
-  .header { text-align: center; padding: 30px 0; }
-  .header h1 { font-size: 28px; color: #00d4aa; margin-bottom: 8px; }
-  .header p { color: #888; font-size: 14px; }
-  .telegram-frame { background: #1a1a2e; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
-  .telegram-header { background: #2a2a4a; padding: 14px 16px; display: flex; align-items: center; gap: 12px; }
-  .telegram-header .avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #00d4aa, #0099ff); display: flex; align-items: center; justify-content: center; font-size: 20px; }
-  .telegram-header .name { font-weight: 600; font-size: 15px; }
-  .telegram-header .status { font-size: 12px; color: #00d4aa; }
-  .chat-area { padding: 16px; min-height: 500px; }
-  .msg { margin-bottom: 12px; max-width: 85%; }
-  .msg.bot { margin-right: auto; }
-  .msg.user { margin-left: auto; }
-  .msg .bubble { padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.6; }
-  .msg.bot .bubble { background: #0d1b2a; border: 1px solid #1b3a5c; border-bottom-left-radius: 4px; color: #c8d6e5; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 12.5px; line-height: 1.8; white-space: pre-wrap; }
-  .msg.user .bubble { background: #0066cc; border-bottom-right-radius: 4px; }
-  .msg .time { font-size: 10px; color: #666; margin-top: 4px; }
-  .msg.user .time { text-align: right; }
-  .separator { text-align: center; color: #555; font-size: 11px; margin: 16px 0; }
-  .features { margin-top: 30px; }
-  .features h2 { font-size: 18px; color: #00d4aa; margin-bottom: 16px; text-align: center; }
-  .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .feature { background: #1a1a2e; border-radius: 12px; padding: 16px; text-align: center; }
-  .feature .icon { font-size: 28px; margin-bottom: 8px; }
-  .feature .title { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
-  .feature .desc { font-size: 11px; color: #888; }
-  .cta { margin-top: 30px; text-align: center; }
-  .cta a { display: inline-block; background: linear-gradient(135deg, #00d4aa, #0099ff); color: #000; font-weight: 700; padding: 14px 32px; border-radius: 12px; text-decoration: none; font-size: 16px; }
-  .cta p { margin-top: 12px; font-size: 12px; color: #666; }
-  .pricing { margin-top: 30px; }
-  .pricing h2 { font-size: 18px; color: #00d4aa; margin-bottom: 16px; text-align: center; }
-  .price-card { background: #1a1a2e; border-radius: 12px; padding: 20px; margin-bottom: 12px; border: 1px solid #2a2a4a; }
-  .price-card .tier { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
-  .price-card .price { font-size: 24px; color: #00d4aa; font-weight: 700; margin-bottom: 8px; }
-  .price-card .details { font-size: 12px; color: #888; line-height: 1.8; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #08080c; color: #e0e0e0; min-height: 100vh; }
+
+  .container { max-width: 440px; margin: 0 auto; padding: 24px 16px 40px; }
+
+  .header { text-align: center; padding: 28px 0 20px; }
+  .header h1 { font-size: 26px; color: #00d4aa; margin-bottom: 6px; }
+  .header p { color: #777; font-size: 13px; line-height: 1.5; }
+  .header .tagline { color: #999; font-size: 11px; margin-top: 6px; letter-spacing: 1px; text-transform: uppercase; }
+
+  /* ===== CAROUSEL ===== */
+  .carousel-wrap { position: relative; margin: 20px 0 24px; overflow: hidden; border-radius: 16px; }
+  .carousel { display: flex; transition: transform 0.35s ease; will-change: transform; }
+  .slide { min-width: 100%; }
+
+  .telegram-frame { background: #1a1a2e; border-radius: 16px; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,0.5); }
+  .telegram-header { background: #1e1e36; padding: 13px 16px; display: flex; align-items: center; gap: 12px; }
+  .telegram-header .avatar { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, #00d4aa, #0099ff); display: flex; align-items: center; justify-content: center; font-size: 19px; flex-shrink: 0; }
+  .telegram-header .name { font-weight: 600; font-size: 14px; color: #fff; }
+  .telegram-header .status { font-size: 11px; color: #00d4aa; }
+  .chat-area { padding: 18px 16px; min-height: 180px; display: flex; flex-direction: column; justify-content: center; }
+
+  /* Alert bubbles */
+  .alert-msg { padding: 14px 16px; border-radius: 12px; margin-bottom: 0; font-size: 13px; line-height: 1.75; word-wrap: break-word; }
+  .alert-msg.type-price-above { background: rgba(255,80,80,0.12); border: 1px solid rgba(255,80,80,0.25); color: #f0c0c0; }
+  .alert-msg.type-price-below { background: rgba(0,212,170,0.10); border: 1px solid rgba(0,212,170,0.22); color: #b0e0d0; }
+  .alert-msg.type-volume { background: rgba(255,165,0,0.12); border: 1px solid rgba(255,165,0,0.25); color: #f0d8a0; }
+  .alert-msg.type-rsi-high { background: rgba(255,60,60,0.12); border: 1px solid rgba(255,60,60,0.25); color: #f0b0b0; }
+  .alert-msg.type-rsi-low { background: rgba(0,212,170,0.10); border: 1px solid rgba(0,212,170,0.22); color: #b0e0d0; }
+  .alert-msg.type-bb-upper { background: rgba(138,43,226,0.12); border: 1px solid rgba(138,43,226,0.25); color: #d0b0f0; }
+  .alert-msg.type-bb-lower { background: rgba(0,150,255,0.12); border: 1px solid rgba(0,150,255,0.25); color: #b0d0f0; }
+  .alert-msg.type-bullish { background: rgba(0,212,170,0.10); border: 1px solid rgba(0,212,170,0.22); color: #b0e0d0; }
+  .alert-msg.type-bearish { background: rgba(255,60,60,0.12); border: 1px solid rgba(255,60,60,0.25); color: #f0b0b0; }
+
+  .alert-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.55; margin-bottom: 6px; font-weight: 700; }
+  .alert-body { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 13px; }
+
+  /* Dots */
+  .dots { display: flex; justify-content: center; gap: 7px; margin-top: 14px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: #333; cursor: pointer; transition: all 0.25s; }
+  .dot.active { background: #00d4aa; width: 20px; border-radius: 4px; }
+
+  /* Arrows */
+  .arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); border: 1px solid #333; color: #aaa; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; font-size: 18px; transition: all 0.2s; backdrop-filter: blur(4px); }
+  .arrow:hover { background: rgba(0,212,170,0.2); color: #fff; border-color: #00d4aa; }
+  .arrow.prev { left: 8px; }
+  .arrow.next { right: 8px; }
+
+  /* ===== LEGEND BELOW CAROUSEL ===== */
+  .slide-legend { text-align: center; padding: 10px 12px 0; }
+  .slide-title { font-size: 13px; font-weight: 700; color: #ccc; }
+  .slide-desc { font-size: 11px; color: #666; margin-top: 3px; line-height: 1.5; }
+
+  /* ===== FEATURES ===== */
+  .features { margin-top: 36px; }
+  .features h2 { font-size: 12px; color: #555; margin-bottom: 14px; text-align: center; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+  .feature-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .feature { background: #12121c; border-radius: 10px; padding: 14px 10px; text-align: center; border: 1px solid #1e1e30; }
+  .feature .icon { font-size: 24px; margin-bottom: 6px; }
+  .feature .title { font-size: 12px; font-weight: 600; margin-bottom: 2px; color: #ccc; }
+  .feature .desc { font-size: 10px; color: #666; }
+
+  /* ===== HOW IT WORKS ===== */
+  .how { margin-top: 36px; }
+  .how h2 { font-size: 12px; color: #555; margin-bottom: 14px; text-align: center; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+  .how-steps { display: flex; gap: 8px; }
+  .how-step { flex: 1; background: #12121c; border-radius: 10px; padding: 14px 10px; text-align: center; border: 1px solid #1e1e30; }
+  .how-step .num { font-size: 20px; color: #00d4aa; font-weight: 800; }
+  .how-step .text { font-size: 11px; color: #888; margin-top: 4px; line-height: 1.4; }
+
+  /* ===== PRICING ===== */
+  .pricing { margin-top: 36px; }
+  .pricing h2 { font-size: 12px; color: #555; margin-bottom: 14px; text-align: center; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+  .price-card { background: #12121c; border-radius: 12px; padding: 18px; margin-bottom: 10px; border: 1px solid #1e1e30; }
   .price-card.featured { border-color: #00d4aa; }
+  .price-card .tier { font-size: 15px; font-weight: 700; margin-bottom: 2px; }
+  .price-card .price { font-size: 22px; color: #00d4aa; font-weight: 700; margin-bottom: 6px; }
+  .price-card .details { font-size: 11px; color: #777; line-height: 1.7; }
+
+  /* ===== CTA ===== */
+  .cta { margin-top: 32px; text-align: center; }
+  .cta a { display: inline-block; background: linear-gradient(135deg, #00d4aa, #0099ff); color: #000; font-weight: 700; padding: 15px 36px; border-radius: 12px; text-decoration: none; font-size: 15px; transition: transform 0.2s, box-shadow 0.2s; }
+  .cta a:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(0,212,170,0.3); }
+  .cta p { margin-top: 10px; font-size: 11px; color: #555; }
+
+  /* ===== NOISE VS SIGNAL ===== */
+  .philosophy { margin-top: 36px; background: #0d0d15; border-radius: 12px; padding: 20px; border: 1px solid #1a1a2a; }
+  .philosophy h3 { font-size: 13px; color: #00d4aa; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1.5px; }
+  .philosophy p { font-size: 12px; color: #777; line-height: 1.7; }
+  .philosophy .highlight { color: #00d4aa; font-weight: 700; }
+
+  /* swipe hint */
+  .swipe-hint { text-align: center; font-size: 10px; color: #444; margin-top: 8px; animation: fadeOut 3s 5s forwards; }
+  @keyframes fadeOut { to { opacity: 0; } }
+
 </style>
 </head>
 <body>
 <div class="container">
+
   <div class="header">
     <h1>🦅 Crypto Alert Bot</h1>
-    <p>Daily crypto alerts on Telegram — powered by CoinGecko</p>
+    <p>Real-time signal alerts on Telegram.<br>Only when your indicators trigger.</p>
+    <div class="tagline">Signal, not noise.</div>
   </div>
 
-  <div class="telegram-frame">
-    <div class="telegram-header">
-      <div class="avatar">🦅</div>
-      <div>
-        <div class="name">Crypto Alert Bot</div>
-        <div class="status">online</div>
-      </div>
-    </div>
-    <div class="chat-area">
-      <div class="msg user">
-        <div class="bubble">/check BTCUSDT</div>
-        <div class="time">23:58</div>
-      </div>
-      <div class="msg bot">
-        <div class="bubble">⏳ Analyzing BTCUSDT (daily)...</div>
-        <div class="time">23:58</div>
-      </div>
-      <div class="msg bot">
-        <div class="bubble">
-📊 <b>Daily Report — BTC</b>
+  <!-- ===== CAROUSEL ===== -->
+  <div class="carousel-wrap" id="carouselWrap">
+    <button class="arrow prev" onclick="slide(-1)" aria-label="Previous">◀</button>
+
+    <div class="carousel" id="carousel">
+
+      <!-- Slide 1: Volume Spike -->
+      <div class="slide">
+        <div class="telegram-frame">
+          <div class="telegram-header">
+            <div class="avatar">🦅</div>
+            <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
+          </div>
+          <div class="chat-area">
+            <div class="alert-msg type-volume">
+              <div class="alert-label">Alert Triggered</div>
+              <div class="alert-body">🔥  <b>VOLUME SPIKE</b>
 ━━━━━━━━━━━━━━━━━━━━
 
-💰 Price: $106,000.00
-📅 Date: 2026-06-01
-📈 Change: +1.44% 🟢
-
-<b>Market Status:</b>
-⚪ <b>RSI: 48.2 (Neutral)</b>
-   Between 30-70 → no extreme momentum in either direction.
-📈 <b>Volume: Elevated (+41%)</b>
-   Trading activity is moderately above average.
-🟢 <b>MA Crossover: Bullish</b>
-   Short-term MA crossed above long-term MA → upward momentum building.
-
-Signal Strength: 🟢 Bullish (1 bull / 0 bear)
-
-━━━━━━━━━━━━━━━━━━━━
-⚠️ <i>Not financial advice. Data only.</i>
+  BTCUSDT
+  Volume: +87% vs 20d avg</div>
+            </div>
+          </div>
         </div>
-        <div class="time">23:59</div>
       </div>
+
+      <!-- Slide 2: RSI Overbought -->
+      <div class="slide">
+        <div class="telegram-frame">
+          <div class="telegram-header">
+            <div class="avatar">🦅</div>
+            <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
+          </div>
+          <div class="chat-area">
+            <div class="alert-msg type-rsi-high">
+              <div class="alert-label">Alert Triggered</div>
+              <div class="alert-body">🔴  <b>RSI OVERBOUGHT</b>
+━━━━━━━━━━━━━━━━━━━━
+
+  ETHUSDT RSI: <code>82.4</code>
+  Price: <code>$3,842.50</code></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: RSI Oversold -->
+      <div class="slide">
+        <div class="telegram-frame">
+          <div class="telegram-header">
+            <div class="avatar">🦅</div>
+            <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
+          </div>
+          <div class="chat-area">
+            <div class="alert-msg type-rsi-low">
+              <div class="alert-label">Alert Triggered</div>
+              <div class="alert-body">🟢  <b>RSI OVERSOLD</b>
+━━━━━━━━━━━━━━━━━━━━
+
+  BTCUSDT RSI: <code>24.1</code>
+  Price: <code>$91,200.00</code></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 4: Price Alert Above -->
+      <div class="slide">
+        <div class="telegram-frame">
+          <div class="telegram-header">
+            <div class="avatar">🦅</div>
+            <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
+          </div>
+          <div class="chat-area">
+            <div class="alert-msg type-price-above">
+              <div class="alert-label">Alert Triggered</div>
+              <div class="alert-body">🚨  <b>PRICE ALERT</b>
+━━━━━━━━━━━━━━━━━━━━
+
+SOLUSDT above <code>$250.00</code>
+Current: <code>$253.80</code></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 5: Price Alert Below -->
+      <div class="slide">
+        <div class="telegram-frame">
+          <div class="telegram-header">
+            <div class="avatar">🦅</div>
+            <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
+          </div>
+          <div class="chat-area">
+            <div class="alert-msg type-price-below">
+              <div class="alert-label">Alert Triggered</div>
+              <div class="alert-body">🚨  <b>PRICE ALERT</b>
+━━━━━━━━━━━━━━━━━━━━
+
+BTCUSDT below <code>$95,000.00</code>
+Current: <code>$94,340.20</code></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 6: BB Upper -->
+      <div class="slide">
+        <div class="telegram-frame">
+          <div class="telegram-header">
+            <div class="avatar">🦅</div>
+            <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
+          </div>
+          <div class="chat-area">
+            <div class="alert-msg type-bb-upper">
+              <div class="alert-label">Alert Triggered</div>
+              <div class="alert-body">📐  <b>BB UPPER</b>
+━━━━━━━━━━━━━━━━━━━━
+
+  BTCUSDT
+  Price ≥ Upper: <code>$121,400.00</code></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 7: BB Lower -->
+      <div class="slide">
+        <div class="telegram-frame">
+          <div class="telegram-header">
+            <div class="avatar">🦅</div>
+            <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
+          </div>
+          <div class="chat-area">
+            <div class="alert-msg type-bb-lower">
+              <div class="alert-label">Alert Triggered</div>
+              <div class="alert-body">📐  <b>BB LOWER</b>
+━━━━━━━━━━━━━━━━━━━━
+
+  BTCUSDT
+  Price ≤ Lower: <code>$88,600.00</code></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 8: Bullish Crossover -->
+      <div class="slide">
+        <div class="telegram-frame">
+          <div class="telegram-header">
+            <div class="avatar">🦅</div>
+            <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
+          </div>
+          <div class="chat-area">
+            <div class="alert-msg type-bullish">
+              <div class="alert-label">Alert Triggered</div>
+              <div class="alert-body">🟢  <b>BULLISH CROSS</b>
+━━━━━━━━━━━━━━━━━━━━
+
+  ETHUSDT: EMA 9 &gt; EMA 21
+  EMA 9: <code>$3,820.40</code> | EMA 21: <code>$3,798.10</code></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 9: Bearish Crossover -->
+      <div class="slide">
+        <div class="telegram-frame">
+          <div class="telegram-header">
+            <div class="avatar">🦅</div>
+            <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
+          </div>
+          <div class="chat-area">
+            <div class="alert-msg type-bearish">
+              <div class="alert-label">Alert Triggered</div>
+              <div class="alert-body">🔴  <b>BEARISH CROSS</b>
+━━━━━━━━━━━━━━━━━━━━
+
+  BTCUSDT: EMA 9 &lt; EMA 21
+  EMA 9: <code>$104,200.00</code> | EMA 21: <code>$105,100.00</code></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
+
+    <button class="arrow next" onclick="slide(1)" aria-label="Next">▶</button>
   </div>
 
+  <!-- Dots -->
+  <div class="dots" id="dots"></div>
+  <div class="swipe-hint">← swipe or tap arrows →</div>
+
+  <!-- Dynamic legend -->
+  <div class="slide-legend" id="slideLegend">
+    <div class="slide-title" id="slideTitle"></div>
+    <div class="slide-desc" id="slideDesc"></div>
+  </div>
+
+  <!-- ===== PHILOSOPHY ===== -->
+  <div class="philosophy">
+    <h3>Why Signal-Only Alerts?</h3>
+    <p>Most crypto spam bots flood your chat with daily reports full of raw data you never asked for.</p>
+    <p style="margin-top:8px;">We don't do that. <span class="highlight">You set your thresholds.</span> We alert you only when something actually happens — a price breakout, an RSI extreme, a volume spike, a moving average crossover, or a Bollinger Band touch.</p>
+    <p style="margin-top:8px;">Want the full data? Just type <code style="color:#00d4aa;background:rgba(0,212,170,0.1);padding:1px 6px;border-radius:4px;">/check BTCUSDT</code>.</p>
+  </div>
+
+  <!-- ===== FEATURES ===== -->
   <div class="features">
-    <h2>⚡ Features</h2>
+    <h2>What We Track</h2>
     <div class="feature-grid">
-      <div class="feature">
-        <div class="icon">💰</div>
-        <div class="title">Price Alerts</div>
-        <div class="desc">Above/below thresholds</div>
-      </div>
-      <div class="feature">
-        <div class="icon">📦</div>
-        <div class="title">Volume Spikes</div>
-        <div class="desc">Detect unusual volume</div>
-      </div>
-      <div class="feature">
-        <div class="icon">📈</div>
-        <div class="title">RSI Alerts</div>
-        <div class="desc">Overbought/oversold</div>
-      </div>
-      <div class="feature">
-        <div class="icon">📐</div>
-        <div class="title">Bollinger Bands</div>
-        <div class="desc">Band touch detection</div>
-      </div>
-      <div class="feature">
-        <div class="icon">📉</div>
-        <div class="title">MA Crossover</div>
-        <div class="desc">EMA/SMA crosses</div>
-      </div>
-      <div class="feature">
-        <div class="icon">📊</div>
-        <div class="title">Daily Reports</div>
-        <div class="desc">Full technical analysis</div>
-      </div>
+      <div class="feature"><div class="icon">💰</div><div class="title">Price</div><div class="desc">Above / below thresholds</div></div>
+      <div class="feature"><div class="icon">📦</div><div class="title">Volume</div><div class="desc">Spike detection vs 20d avg</div></div>
+      <div class="feature"><div class="icon">📈</div><div class="title">RSI</div><div class="desc">Overbought / oversold</div></div>
+      <div class="feature"><div class="icon">📐</div><div class="title">Bollinger</div><div class="desc">Band touch alerts</div></div>
+      <div class="feature"><div class="icon">📉</div><div class="title">MA Cross</div><div class="desc">EMA / SMA crossovers</div></div>
+      <div class="feature"><div class="icon">📊</div><div class="title">On-Demand</div><div class="desc">/check for full data</div></div>
     </div>
   </div>
 
+  <!-- ===== HOW IT WORKS ===== -->
+  <div class="how">
+    <h2>How It Works</h2>
+    <div class="how-steps">
+      <div class="how-step"><div class="num">1</div><div class="text">Start the bot on Telegram</div></div>
+      <div class="how-step"><div class="num">2</div><div class="text">Set your alert thresholds</div></div>
+      <div class="how-step"><div class="num">3</div><div class="text">Get notified only on signals</div></div>
+    </div>
+  </div>
+
+  <!-- ===== PRICING ===== -->
   <div class="pricing">
-    <h2>💵 Pricing</h2>
+    <h2>Pricing</h2>
     <div class="price-card">
       <div class="tier">🆓 Free Trial</div>
       <div class="price">$0</div>
@@ -151,10 +363,80 @@ Signal Strength: 🟢 Bullish (1 bull / 0 bear)
     </div>
   </div>
 
+  <!-- ===== CTA ===== -->
   <div class="cta">
     <a href="https://t.me/crypto_alert_maxbot" target="_blank">Try the Bot →</a>
     <p>Free to try. No signup needed.</p>
   </div>
+
 </div>
+
+<script>
+const slidesData = [
+  { title: "🔥 Volume Spike", desc: "Detects unusual trading volume vs 20-day average. Alerts when it exceeds your threshold." },
+  { title: "🔴 RSI Overbought", desc: "Triggers when RSI crosses above your set level — signals potential selling pressure." },
+  { title: "🟢 RSI Oversold", desc: "Triggers when RSI drops below your set level — signals potential buying opportunity." },
+  { title: "🚨 Price Alert — Above", desc: "Notifies when price breaks above your threshold. Never miss a breakout." },
+  { title: "🚨 Price Alert — Below", desc: "Notifies when price drops below your threshold. Protect your positions." },
+  { title: "📐 Bollinger Upper", desc: "Alerts when price touches the upper Bollinger Band — market may be overextended." },
+  { title: "📐 Bollinger Lower", desc: "Alerts when price touches the lower Bollinger Band — market may be oversold." },
+  { title: "🟢 Bullish Crossover", desc: "Short-term MA crosses above long-term MA — upward momentum building." },
+  { title: "🔴 Bearish Crossover", desc: "Short-term MA crosses below long-term MA — downward momentum building." }
+];
+
+const carousel = document.getElementById('carousel');
+const dotsContainer = document.getElementById('dots');
+const slideTitle = document.getElementById('slideTitle');
+const slideDesc = document.getElementById('slideDesc');
+const wrap = document.getElementById('carouselWrap');
+const total = slidesData.length;
+let current = 0;
+let autoTimer = null;
+let touchStartX = 0;
+
+// Build dots
+for (let i = 0; i < total; i++) {
+  const d = document.createElement('div');
+  d.className = 'dot' + (i === 0 ? ' active' : '');
+  d.style.cursor = 'pointer';
+  d.onclick = () => goTo(i);
+  dotsContainer.appendChild(d);
+}
+
+function updateUI() {
+  carousel.style.transform = `translateX(-${current * 100}%)`;
+  document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
+  slideTitle.textContent = slidesData[current].title;
+  slideDesc.textContent = slidesData[current].desc;
+}
+
+function slide(dir) {
+  current = (current + dir + total) % total;
+  updateUI();
+  resetAuto();
+}
+
+function goTo(idx) {
+  current = idx;
+  updateUI();
+  resetAuto();
+}
+
+function resetAuto() {
+  clearInterval(autoTimer);
+  autoTimer = setInterval(() => { current = (current + 1) % total; updateUI(); }, 4000);
+}
+
+// Touch / swipe
+wrap.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive: true});
+wrap.addEventListener('touchend', e => {
+  const diff = touchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 40) slide(diff > 0 ? 1 : -1);
+}, {passive: true});
+
+// Init
+updateUI();
+autoTimer = setInterval(() => { current = (current + 1) % total; updateUI(); }, 4000);
+</script>
 </body>
 </html>
