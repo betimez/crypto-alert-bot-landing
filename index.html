@@ -28,19 +28,17 @@
   .chat-area { padding: 18px 16px; min-height: 180px; display: flex; flex-direction: column; justify-content: center; }
 
   /* Alert bubbles */
-  .alert-msg { padding: 14px 16px; border-radius: 12px; margin-bottom: 0; font-size: 13px; line-height: 1.75; word-wrap: break-word; }
-  .alert-msg.type-price-above { background: rgba(255,80,80,0.12); border: 1px solid rgba(255,80,80,0.25); color: #f0c0c0; }
-  .alert-msg.type-price-below { background: rgba(0,212,170,0.10); border: 1px solid rgba(0,212,170,0.22); color: #b0e0d0; }
-  .alert-msg.type-volume { background: rgba(255,165,0,0.12); border: 1px solid rgba(255,165,0,0.25); color: #f0d8a0; }
-  .alert-msg.type-rsi-high { background: rgba(255,60,60,0.12); border: 1px solid rgba(255,60,60,0.25); color: #f0b0b0; }
-  .alert-msg.type-rsi-low { background: rgba(0,212,170,0.10); border: 1px solid rgba(0,212,170,0.22); color: #b0e0d0; }
-  .alert-msg.type-bb-upper { background: rgba(138,43,226,0.12); border: 1px solid rgba(138,43,226,0.25); color: #d0b0f0; }
-  .alert-msg.type-bb-lower { background: rgba(0,150,255,0.12); border: 1px solid rgba(0,150,255,0.25); color: #b0d0f0; }
-  .alert-msg.type-bullish { background: rgba(0,212,170,0.10); border: 1px solid rgba(0,212,170,0.22); color: #b0e0d0; }
-  .alert-msg.type-bearish { background: rgba(255,60,60,0.12); border: 1px solid rgba(255,60,60,0.25); color: #f0b0b0; }
-
-  .alert-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.55; margin-bottom: 6px; font-weight: 700; }
-  .alert-body { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 13px; line-height: 1.8; white-space: pre-wrap; }
+  .alert-bubble { padding: 14px 16px; border-radius: 12px; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 13px; line-height: 1.8; word-wrap: break-word; }
+  .ab-above { background: rgba(255,80,80,0.12); border: 1px solid rgba(255,80,80,0.25); color: #f0c0c0; }
+  .ab-below { background: rgba(0,212,170,0.10); border: 1px solid rgba(0,212,170,0.22); color: #b0e0d0; }
+  .ab-volume { background: rgba(255,165,0,0.12); border: 1px solid rgba(255,165,0,0.25); color: #f0d8a0; }
+  .ab-rsi-high { background: rgba(255,60,60,0.12); border: 1px solid rgba(255,60,60,0.25); color: #f0b0b0; }
+  .ab-rsi-low { background: rgba(0,212,170,0.10); border: 1px solid rgba(0,212,170,0.22); color: #b0e0d0; }
+  .ab-bb-upper { background: rgba(138,43,226,0.12); border: 1px solid rgba(138,43,226,0.25); color: #d0b0f0; }
+  .ab-bb-lower { background: rgba(0,150,255,0.12); border: 1px solid rgba(0,150,255,0.25); color: #b0d0f0; }
+  .ab-bullish { background: rgba(0,212,170,0.10); border: 1px solid rgba(0,212,170,0.22); color: #b0e0d0; }
+  .ab-bearish { background: rgba(255,60,60,0.12); border: 1px solid rgba(255,60,60,0.25); color: #f0b0b0; }
+  .alert-bubble code { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; }
 
   /* Dots */
   .dots { display: flex; justify-content: center; gap: 7px; margin-top: 14px; }
@@ -117,7 +115,7 @@
 
     <div class="carousel" id="carousel">
 
-      <!-- Slide 1: Volume Spike -->
+      <!-- Slide 1: Price Alert Above -->
       <div class="slide">
         <div class="telegram-frame">
           <div class="telegram-header">
@@ -125,18 +123,17 @@
             <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
           </div>
           <div class="chat-area">
-            <div class="alert-msg type-volume">
-              <div class="alert-label">Alert Triggered</div>
-              <div class="alert-body">🔥  <b>VOLUME SPIKE</b>
-━━━━━━━━━━━━━━━━━━━━
-
-  BTCUSDT<br>  Volume: +87% vs 20d avg</div>
-            </div>
+<div class="alert-bubble ab-above">
+🚨  <b>PRICE ALERT</b><br>
+━━━━━━━━━━━━━━━━━━━━<br><br>
+SOLUSDT above <code>$250.00</code><br>
+Current: <code>$253.80</code>
+</div>
           </div>
         </div>
       </div>
 
-      <!-- Slide 2: RSI Overbought -->
+      <!-- Slide 2: Price Alert Below -->
       <div class="slide">
         <div class="telegram-frame">
           <div class="telegram-header">
@@ -144,18 +141,17 @@
             <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
           </div>
           <div class="chat-area">
-            <div class="alert-msg type-rsi-high">
-              <div class="alert-label">Alert Triggered</div>
-              <div class="alert-body">🔴  <b>RSI OVERBOUGHT</b>
-━━━━━━━━━━━━━━━━━━━━
-
-  ETHUSDT RSI: <code>82.4</code><br>  Price: <code>$3,842.50</code></div>
-            </div>
+<div class="alert-bubble ab-below">
+🚨  <b>PRICE ALERT</b><br>
+━━━━━━━━━━━━━━━━━━━━<br><br>
+BTCUSDT below <code>$95,000.00</code><br>
+Current: <code>$94,340.20</code>
+</div>
           </div>
         </div>
       </div>
 
-      <!-- Slide 3: RSI Oversold -->
+      <!-- Slide 3: Volume Spike -->
       <div class="slide">
         <div class="telegram-frame">
           <div class="telegram-header">
@@ -163,18 +159,17 @@
             <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
           </div>
           <div class="chat-area">
-            <div class="alert-msg type-rsi-low">
-              <div class="alert-label">Alert Triggered</div>
-              <div class="alert-body">🟢  <b>RSI OVERSOLD</b>
-━━━━━━━━━━━━━━━━━━━━
-
-  BTCUSDT RSI: <code>24.1</code><br>  Price: <code>$91,200.00</code></div>
-            </div>
+<div class="alert-bubble ab-volume">
+🔥  <b>VOLUME SPIKE</b><br>
+━━━━━━━━━━━━━━━━━━━━<br><br>
+  BTCUSDT<br>
+  Volume: +87% vs 20d avg
+</div>
           </div>
         </div>
       </div>
 
-      <!-- Slide 4: Price Alert Above -->
+      <!-- Slide 4: RSI Overbought -->
       <div class="slide">
         <div class="telegram-frame">
           <div class="telegram-header">
@@ -182,18 +177,17 @@
             <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
           </div>
           <div class="chat-area">
-            <div class="alert-msg type-price-above">
-              <div class="alert-label">Alert Triggered</div>
-              <div class="alert-body">🚨  <b>PRICE ALERT</b>
-━━━━━━━━━━━━━━━━━━━━
-
-SOLUSDT above <code>$250.00</code><br>Current: <code>$253.80</code></div>
-            </div>
+<div class="alert-bubble ab-rsi-high">
+🔴  <b>RSI OVERBOUGHT</b><br>
+━━━━━━━━━━━━━━━━━━━━<br><br>
+  ETHUSDT RSI: <code>82.4</code><br>
+  Price: <code>$3,842.50</code>
+</div>
           </div>
         </div>
       </div>
 
-      <!-- Slide 5: Price Alert Below -->
+      <!-- Slide 5: RSI Oversold -->
       <div class="slide">
         <div class="telegram-frame">
           <div class="telegram-header">
@@ -201,13 +195,12 @@ SOLUSDT above <code>$250.00</code><br>Current: <code>$253.80</code></div>
             <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
           </div>
           <div class="chat-area">
-            <div class="alert-msg type-price-below">
-              <div class="alert-label">Alert Triggered</div>
-              <div class="alert-body">🚨  <b>PRICE ALERT</b>
-━━━━━━━━━━━━━━━━━━━━
-
-BTCUSDT below <code>$95,000.00</code><br>Current: <code>$94,340.20</code></div>
-            </div>
+<div class="alert-bubble ab-rsi-low">
+🟢  <b>RSI OVERSOLD</b><br>
+━━━━━━━━━━━━━━━━━━━━<br><br>
+  BTCUSDT RSI: <code>24.1</code><br>
+  Price: <code>$91,200.00</code>
+</div>
           </div>
         </div>
       </div>
@@ -220,13 +213,12 @@ BTCUSDT below <code>$95,000.00</code><br>Current: <code>$94,340.20</code></div>
             <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
           </div>
           <div class="chat-area">
-            <div class="alert-msg type-bb-upper">
-              <div class="alert-label">Alert Triggered</div>
-              <div class="alert-body">📐  <b>BB UPPER</b>
-━━━━━━━━━━━━━━━━━━━━
-
-  BTCUSDT<br>  Price ≥ Upper: <code>$121,400.00</code></div>
-            </div>
+<div class="alert-bubble ab-bb-upper">
+📐  <b>BB UPPER</b><br>
+━━━━━━━━━━━━━━━━━━━━<br><br>
+  BTCUSDT<br>
+  Price ≥ Upper: <code>$121,400.00</code>
+</div>
           </div>
         </div>
       </div>
@@ -239,18 +231,17 @@ BTCUSDT below <code>$95,000.00</code><br>Current: <code>$94,340.20</code></div>
             <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
           </div>
           <div class="chat-area">
-            <div class="alert-msg type-bb-lower">
-              <div class="alert-label">Alert Triggered</div>
-              <div class="alert-body">📐  <b>BB LOWER</b>
-━━━━━━━━━━━━━━━━━━━━
-
-  BTCUSDT<br>  Price ≤ Lower: <code>$88,600.00</code></div>
-            </div>
+<div class="alert-bubble ab-bb-lower">
+📐  <b>BB LOWER</b><br>
+━━━━━━━━━━━━━━━━━━━━<br><br>
+  BTCUSDT<br>
+  Price ≤ Lower: <code>$88,600.00</code>
+</div>
           </div>
         </div>
       </div>
 
-      <!-- Slide 8: Bullish Crossover -->
+      <!-- Slide 8: Bullish Cross -->
       <div class="slide">
         <div class="telegram-frame">
           <div class="telegram-header">
@@ -258,18 +249,17 @@ BTCUSDT below <code>$95,000.00</code><br>Current: <code>$94,340.20</code></div>
             <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
           </div>
           <div class="chat-area">
-            <div class="alert-msg type-bullish">
-              <div class="alert-label">Alert Triggered</div>
-              <div class="alert-body">🟢  <b>BULLISH CROSS</b>
-━━━━━━━━━━━━━━━━━━━━
-
-  ETHUSDT: EMA 9 &gt; EMA 21<br>  EMA 9: <code>$3,820.40</code> | EMA 21: <code>$3,798.10</code></div>
-            </div>
+<div class="alert-bubble ab-bullish">
+🟢  <b>BULLISH CROSS</b><br>
+━━━━━━━━━━━━━━━━━━━━<br><br>
+  ETHUSDT: EMA 9 &gt; EMA 21<br>
+  EMA 9: <code>$3,820.40</code> | EMA 21: <code>$3,798.10</code>
+</div>
           </div>
         </div>
       </div>
 
-      <!-- Slide 9: Bearish Crossover -->
+      <!-- Slide 9: Bearish Cross -->
       <div class="slide">
         <div class="telegram-frame">
           <div class="telegram-header">
@@ -277,13 +267,12 @@ BTCUSDT below <code>$95,000.00</code><br>Current: <code>$94,340.20</code></div>
             <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
           </div>
           <div class="chat-area">
-            <div class="alert-msg type-bearish">
-              <div class="alert-label">Alert Triggered</div>
-              <div class="alert-body">🔴  <b>BEARISH CROSS</b>
-━━━━━━━━━━━━━━━━━━━━
-
-  BTCUSDT: EMA 9 &lt; EMA 21<br>  EMA 9: <code>$104,200.00</code> | EMA 21: <code>$105,100.00</code></div>
-            </div>
+<div class="alert-bubble ab-bearish">
+🔴  <b>BEARISH CROSS</b><br>
+━━━━━━━━━━━━━━━━━━━━<br><br>
+  BTCUSDT: EMA 9 &lt; EMA 21<br>
+  EMA 9: <code>$104,200.00</code> | EMA 21: <code>$105,100.00</code>
+</div>
           </div>
         </div>
       </div>
