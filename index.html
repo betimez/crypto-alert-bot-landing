@@ -52,7 +52,6 @@
   .ab-golden { background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.25); color: #f0e0a0; }
   .ab-settings { background: rgba(0,150,255,0.06); border: 1px solid rgba(0,150,255,0.15); color: #b0c4d8; }
   .ab-report { background: rgba(0,212,170,0.06); border: 1px solid rgba(0,212,170,0.15); color: #c8d6e5; }
-  .ab-report i { color: #555; font-size: 11px; }
 
   .showcase-label { text-align: center; padding: 10px 0 0; }
   .showcase-label .sl-group { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 2px; }
@@ -257,10 +256,10 @@ Short-Term: Bullish &#x2705;<br><br>
 &#x1F4C8; Volume: <code>+52%</code> vs. 20-Day Avg<br>
 &#x2192; Trading activity is 52% higher than<br>
 its 20-day baseline.<br>
-<i>(Below +10% = quiet. Above +50% = aggressive)</i><br><br>
+<i style="color:#555;font-size:11px;">(Below +10% = quiet. Above +50% = aggressive)</i><br><br>
 &#x1F7E2; RSI: <code>72.3 / 100</code> (Overheated)<br>
 &#x2192; Momentum score on a fixed 0&#x2013;100 scale.<br>
-<i>(Below 30 = on discount. Above 70 = overpriced)</i><br>
+<i style="color:#555;font-size:11px;">(Below 30 = on discount. Above 70 = overpriced)</i><br>
 &#x2192; No bearish divergence detected.<br><br>
 &#x1F310; Bollinger: Price riding Upper Band<br>
 &#x2192; Asset is stretched but momentum strong.<br><br>
@@ -279,3 +278,109 @@ Trend is strong&#x2014;discipline still required.<br>
       </div>
     </div>
 
+  </div>
+
+  <!-- ═══════════ SMART TREND DETECTION ═══════════ -->
+  <div class="std">
+    <h2>Smart Trend Detection</h2>
+    <div class="std-card">
+      <h3>Signal, Not Noise</h3>
+      <div class="std-bullet">
+        <div class="sb-title">🔇 Filters Short-Term Noise</div>
+        <div class="sb-desc">The bot monitors indicator math constantly, but only pings your phone when a meaningful, macro trend shift occurs.</div>
+      </div>
+      <div class="std-bullet">
+        <div class="sb-title">📊 Clear Market States</div>
+        <div class="sb-desc">Translates complex technical data into simple, actionable statuses like "Pullback Within Uptrend" or "Strong Downtrend."</div>
+      </div>
+      <div class="std-bullet">
+        <div class="sb-title">🎯 Quality Over Quantity</div>
+        <div class="sb-desc">Designed for busy people. No endless notification spam—just the critical data you need to manage your portfolio.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ WHAT WE TRACK ═══════════ -->
+  <div class="track">
+    <h2>What We Track</h2>
+    <div class="track-grid">
+      <div class="track-item"><span class="ti-icon">💰</span><div class="ti-name">Price</div><div class="ti-desc">Above / below thresholds</div></div>
+      <div class="track-item"><span class="ti-icon">📦</span><div class="ti-name">Volume</div><div class="ti-desc">Spike detection vs 20d avg</div></div>
+      <div class="track-item"><span class="ti-icon">📈</span><div class="ti-name">RSI</div><div class="ti-desc">Overbought / oversold</div></div>
+      <div class="track-item"><span class="ti-icon">📐</span><div class="ti-name">Bollinger</div><div class="ti-desc">Band touch alerts</div></div>
+      <div class="track-item"><span class="ti-icon">📉</span><div class="ti-name">MA Cross</div><div class="ti-desc">EMA 21×50, 50×200</div></div>
+      <div class="track-item"><span class="ti-icon">🔍</span><div class="ti-name">On-Demand</div><div class="ti-desc">/check any symbol anytime</div></div>
+    </div>
+  </div>
+
+  <!-- ═══════════ CLASSIFICATIONS ═══════════ -->
+  <div class="classifications">
+    <h2>Market Classifications</h2>
+    <div class="class-grid">
+      <div class="class-item"><div class="emoji">🟢🟢</div><div class="name">Strong Bullish</div></div>
+      <div class="class-item"><div class="emoji">🟢</div><div class="name">Bullish</div></div>
+      <div class="class-item"><div class="emoji">🟡</div><div class="name">Transition</div></div>
+      <div class="class-item"><div class="emoji">🟠</div><div class="name">Potential Reversal</div></div>
+      <div class="class-item"><div class="emoji">🔴</div><div class="name">Bearish</div></div>
+      <div class="class-item"><div class="emoji">🔴🔴</div><div class="name">Strong Bearish</div></div>
+    </div>
+  </div>
+
+  <!-- ═══════════ PRIORITY HIERARCHY ═══════════ -->
+  <div class="hierarchy">
+    <h2>Alert Priority</h2>
+    <div class="hier-item">
+      <span class="hier-priority p-critical">CRITICAL</span>
+      <div class="hier-body"><div class="label">EMA 50 × EMA 200</div><div class="desc">Golden cross / Death cross. Long-term trend reversal.</div></div>
+    </div>
+    <div class="hier-item">
+      <span class="hier-priority p-high">HIGH</span>
+      <div class="hier-body"><div class="label">EMA 21 × EMA 50</div><div class="desc">Medium-term trend shift. Primary alert source.</div></div>
+    </div>
+    <div class="hier-item">
+      <span class="hier-priority p-medium">MEDIUM</span>
+      <div class="hier-body"><div class="label">Classification Change</div><div class="desc">Market structure shifts between 6 states.</div></div>
+    </div>
+    <div class="hier-item">
+      <span class="hier-priority p-low">LOW</span>
+      <div class="hier-body"><div class="label">Price / RSI / Volume / BB</div><div class="desc">Indicator alerts. Suppressed when trend fires.</div></div>
+    </div>
+    <div class="hier-item">
+      <span class="hier-priority p-context">CONTEXT</span>
+      <div class="hier-body"><div class="label">EMA 9 × EMA 21</div><div class="desc">Short-term momentum. Never triggers alerts.</div></div>
+    </div>
+  </div>
+
+  <!-- ═══════════ LIVE BOT STATUS ═══════════ -->
+  <div class="live-status">
+    <div class="ls-top">
+      <span class="ls-dot"></span>
+      <span class="ls-label">System Operational</span>
+    </div>
+    <div class="ls-metric">
+      <strong>Last Macro Trend Shift: 42 minutes ago via BTCUSDT</strong>
+    </div>
+    <div class="ls-sub">Our engine constantly processes live exchange data streams. If the markets are moving, the bot is firing.</div>
+  </div>
+
+  <!-- ═══════════ FREE CTA ═══════════ -->
+  <div class="free-cta">
+    <div class="free-cta-card">
+      <div class="fc-tag">100% FREE UTILITY</div>
+      <div class="fc-headline">Clean Trend Intelligence for Everyone</div>
+      <div class="fc-sub">All premium features unlocked. No paywalls, no subscriptions, no stress.<br>If the bot helps you make better decisions, feel free to drop a tip!</div>
+      <a href="https://t.me/crypto_alert_maxbot" target="_blank">Launch Free Bot on Telegram ➔</a>
+      <div class="fc-tip">☕️ Enjoying the bot? Support the project: DM @hitoshi3 for tip details</div>
+    </div>
+  </div>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <div class="footer">
+    <p>CryptoEdge Alert Bot — Built for the community.<br>
+    ⚠️ Not financial advice. Data only.<br><br>
+    Found a bug? Let me know at <a href="https://t.me/hitoshi3" target="_blank">@hitoshi3</a> (Feedback welcome)</p>
+  </div>
+
+</div>
+</body>
+</html>
