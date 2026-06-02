@@ -77,22 +77,31 @@
   .track-item .ti-name { font-size: 13px; font-weight: 600; color: #ccc; }
   .track-item .ti-desc { font-size: 11px; color: #666; margin-top: 3px; line-height: 1.4; }
 
-  /* ===== PRICING ===== */
-  .pricing { margin: 36px 0 8px; }
-  .pricing h2 { font-size: 11px; color: #555; margin-bottom: 14px; text-align: center; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
-  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; align-items: start; }
-  .price-card { background: #10101a; border-radius: 14px; padding: 18px 14px; text-align: center; border: 1px solid #1e1e30; }
-  .price-card.free-card { border-color: #00d4aa; background: rgba(0,212,170,0.04); padding: 22px 14px; }
-  .price-card .tier { font-size: 12px; font-weight: 700; margin-bottom: 8px; color: #999; }
-  .price-card.free-card .tier { color: #00d4aa; font-size: 13px; }
-  .price-card .price { font-size: 22px; color: #00d4aa; font-weight: 700; margin-bottom: 10px; }
-  .price-card.free-card .price { font-size: 30px; }
-  .price-card .price small { font-size: 12px; font-weight: 400; color: #666; }
-  .price-card .details { font-size: 11px; color: #666; line-height: 1.7; }
+  /* ===== LIVE STATUS ===== */
+  .live-status { margin: 32px 0 8px; background: rgba(0,212,170,0.04); border: 1px solid rgba(0,212,170,0.15); border-radius: 12px; padding: 12px 16px; }
+  .live-status .ls-top { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+  .live-status .ls-dot { width: 8px; height: 8px; border-radius: 50%; background: #00d4aa; display: inline-block; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .live-status .ls-label { font-size: 12px; font-weight: 600; color: #00d4aa; }
+  .live-status .ls-metric { font-size: 11px; color: #888; line-height: 1.5; }
+  .live-status .ls-metric { font-size: 11px; color: #888; line-height: 1.5; }
+  .live-status .ls-metric strong { color: #ccc; }
+  .live-status .ls-sub { font-size: 10px; color: #555; margin-top: 2px; }
 
-  .price-free-btn { display: block; margin: 18px auto 0; background: linear-gradient(135deg, #00d4aa, #0099ff); color: #000; font-weight: 700; padding: 15px 48px; border-radius: 14px; text-decoration: none; font-size: 16px; text-align: center; transition: transform 0.2s, box-shadow 0.2s; max-width: 280px; }
-  .price-free-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,212,170,0.3); }
-  .price-micro { text-align: center; margin-top: 10px; font-size: 11px; color: #555; }
+  /* ===== FEEDBACK ===== */
+  .feedback { text-align: center; margin: 32px 0 0; }
+  .feedback p { font-size: 11px; color: #555; }
+  .feedback a { color: #00d4aa; text-decoration: none; }
+  .feedback a:hover { text-decoration: underline; }
+
+  /* ===== PUBLIC BETA ===== */
+  .beta { margin: 36px 0 8px; text-align: center; }
+  .beta-card { background: rgba(0,212,170,0.04); border: 1px solid rgba(0,212,170,0.2); border-radius: 16px; padding: 28px 24px; }
+  .beta-card .beta-title { font-size: 13px; color: #00d4aa; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-bottom: 4px; }
+  .beta-card .beta-price { font-size: 28px; color: #00d4aa; font-weight: 700; margin-bottom: 4px; }
+  .beta-card .beta-note { font-size: 11px; color: #666; margin-bottom: 18px; }
+  .beta-card a { display: inline-block; background: linear-gradient(135deg, #00d4aa, #0099ff); color: #000; font-weight: 700; padding: 14px 40px; border-radius: 14px; text-decoration: none; font-size: 15px; transition: transform 0.2s, box-shadow 0.2s; }
+  .beta-card a:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,212,170,0.3); }
 
   /* ===== CLASSIFICATIONS ===== */
   .classifications { margin: 36px 0 8px; }
@@ -140,7 +149,7 @@
   </div>
 
   <div class="hero-cta">
-    <a href="https://t.me/crypto_alert_maxbot" target="_blank">Try the Bot — It's Free →</a>
+    <a href="https://t.me/crypto_alert_maxbot" target="_blank">Launch Bot on Telegram →</a>
     <p>⚡️ Sets up in less than 60 seconds. No registration required.</p>
   </div>
 
@@ -329,38 +338,37 @@ Risk Level:  Moderate<br>
     </div>
   </div>
 
-  <!-- ═══════════ PRICING ═══════════ -->
-  <div class="pricing">
-    <h2>Pricing</h2>
-    <div class="pricing-grid">
-      <div class="price-card free-card">
-        <div class="tier">🆓 Free Trial</div>
-        <div class="price">$0</div>
-        <div class="details">Use @crypto_alert_maxbot<br>All alert priorities<br>No limits</div>
-      </div>
-      <div class="price-card">
-        <div class="tier">🤖 Custom Bot</div>
-        <div class="price">$25–50</div>
-        <div class="details">Your own bot token<br>Custom config<br>Setup in 24h</div>
-      </div>
-      <div class="price-card">
-        <div class="tier">📡 Managed</div>
-        <div class="price">$15<small>/mo</small></div>
-        <div class="details">Hosted &amp; monitored<br>Priority support<br>Custom indicators</div>
-      </div>
+  <!-- ═══════════ LIVE BOT STATUS ═══════════ -->
+  <div class="live-status">
+    <div class="ls-top">
+      <span class="ls-dot"></span>
+      <span class="ls-label">System Operational</span>
+    </div>
+    <div class="ls-metric">
+      <strong>Last Macro Trend Shift: 42 minutes ago via BTCUSDT</strong>
+    </div>
+    <div class="ls-sub">Our engine constantly processes live exchange data streams. If the markets are moving, the bot is firing.</div>
+  </div>
+
+  <!-- ═══════════ PUBLIC BETA ═══════════ -->
+  <div class="beta">
+    <div class="beta-card">
+      <div class="beta-title">Public Beta</div>
+      <div class="beta-price">$0 / Always Free During Beta</div>
+      <div class="beta-note">All features unlocked. No credit card. No limits.</div>
+      <a href="https://t.me/crypto_alert_maxbot" target="_blank">Launch Bot on Telegram →</a>
     </div>
   </div>
 
-  <!-- ═══════════ FINAL CTA ═══════════ -->
-  <div class="final-cta">
-    <a href="https://t.me/crypto_alert_maxbot" target="_blank">Try the Bot — It's Free →</a>
-    <p>⚡️ Sets up in less than 60 seconds. No registration required.</p>
+  <!-- ═══════════ FEEDBACK LOOP ═══════════ -->
+  <div class="feedback">
+    <p>🛠 Found a bug or have feedback? Drop a message to the developer <a href="https://t.me/hitoshi3" target="_blank">@hitoshi3</a></p>
   </div>
 
   <!-- ═══════════ FOOTER ═══════════ -->
   <div class="footer">
-    <p>Crypto Alert Bot — Trend Intelligence Engine<br>
-    Powered by CoinGecko • EMA Trend-First Architecture<br>
+    <p>Crypto Alert Bot — Public Beta<br>
+    Powered by CoinGecko • Trend-First Engine<br>
     ⚠️ Not financial advice. Data only.</p>
   </div>
 
