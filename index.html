@@ -7,376 +7,322 @@
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #08080c; color: #e0e0e0; min-height: 100vh; }
-  .container { max-width: 440px; margin: 0 auto; padding: 24px 16px 40px; }
+  .container { max-width: 460px; margin: 0 auto; padding: 20px 16px 48px; }
 
-  .header { text-align: center; padding: 28px 0 20px; }
-  .header h1 { font-size: 26px; color: #00d4aa; margin-bottom: 6px; }
-  .header p { color: #777; font-size: 13px; line-height: 1.5; }
-  .header .tagline { color: #999; font-size: 11px; margin-top: 6px; letter-spacing: 1px; text-transform: uppercase; }
+  /* ===== HERO ===== */
+  .header { text-align: center; padding: 32px 0 12px; }
+  .header h1 { font-size: 28px; color: #00d4aa; margin-bottom: 8px; }
+  .header .subheadline { color: #888; font-size: 13.5px; line-height: 1.55; margin-top: 8px; padding: 0 8px; }
+  .header .tagline { color: #00d4aa; font-size: 11px; margin-top: 14px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; opacity: 0.9; }
 
-  /* ===== CAROUSEL ===== */
-  .carousel-wrap { position: relative; margin: 20px 0 24px; overflow: hidden; border-radius: 16px; }
-  .carousel { display: flex; transition: transform 0.35s ease; will-change: transform; }
-  .slide { min-width: 100%; }
+  .hero-cta { text-align: center; margin: 22px 0 8px; }
+  .hero-cta a { display: inline-block; background: linear-gradient(135deg, #00d4aa, #0099ff); color: #000; font-weight: 700; padding: 14px 40px; border-radius: 14px; text-decoration: none; font-size: 15px; transition: transform 0.2s, box-shadow 0.2s; }
+  .hero-cta a:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,212,170,0.3); }
+  .hero-cta p { margin-top: 8px; font-size: 11px; color: #555; }
 
-  .telegram-frame { background: #1a1a2e; border-radius: 16px; overflow: hidden; box-shadow: 0 12px 40px rgba(0,0,0,0.5); }
-  .telegram-header { background: #1e1e36; padding: 13px 16px; display: flex; align-items: center; gap: 12px; }
-  .telegram-header .avatar { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, #00d4aa, #0099ff); display: flex; align-items: center; justify-content: center; font-size: 19px; flex-shrink: 0; }
-  .telegram-header .name { font-weight: 600; font-size: 14px; color: #fff; }
-  .telegram-header .status { font-size: 11px; color: #00d4aa; }
-  .chat-area { padding: 18px 16px; min-height: 200px; display: flex; flex-direction: column; justify-content: center; }
+  /* ===== HOW IT WORKS ===== */
+  .hiw { margin: 32px 0 8px; }
+  .hiw h2 { font-size: 11px; color: #555; margin-bottom: 16px; text-align: center; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+  .hiw-row { display: flex; gap: 10px; }
+  .hiw-step { flex: 1; background: #10101a; border-radius: 12px; padding: 16px 12px; text-align: center; border: 1px solid #1e1e30; }
+  .hiw-step .num { font-size: 22px; font-weight: 700; color: #00d4aa; margin-bottom: 6px; }
+  .hiw-step .step-title { font-size: 12px; font-weight: 600; color: #ccc; margin-bottom: 4px; }
+  .hiw-step .step-desc { font-size: 10px; color: #666; line-height: 1.5; }
 
-  /* Report bubble */
-  .report-bubble { padding: 14px 16px; border-radius: 12px; background: rgba(0,212,170,0.06); border: 1px solid rgba(0,212,170,0.15); font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 12.5px; line-height: 1.85; word-wrap: break-word; color: #c8d6e5; }
-  .report-bubble code { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; background: rgba(0,212,170,0.1); padding: 1px 5px; border-radius: 3px; font-size: 12px; }
+  /* ===== 3-COLUMN ALERT SHOWCASE ===== */
+  .alert-showcase { margin: 32px 0 8px; }
+  .alert-showcase h2 { font-size: 11px; color: #555; margin-bottom: 14px; text-align: center; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+  .alert-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .alert-col { border-radius: 12px; overflow: hidden; box-shadow: 0 8px 28px rgba(0,0,0,0.4); }
+  .telegram-frame { background: #1a1a2e; }
+  .telegram-header { background: #1e1e36; padding: 8px 10px; display: flex; align-items: center; gap: 8px; }
+  .telegram-header .avatar { width: 26px; height: 26px; border-radius: 50%; background: linear-gradient(135deg, #00d4aa, #0099ff); display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
+  .telegram-header .name { font-weight: 600; font-size: 11px; color: #fff; }
+  .telegram-header .status { font-size: 9px; color: #00d4aa; border-radius: 6px; }
+  .chat-area { padding: 10px 10px 12px; }
 
-  /* Trend alert bubbles */
-  .trend-bubble { padding: 14px 16px; border-radius: 12px; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 13px; line-height: 1.85; word-wrap: break-word; }
-  .tb-bull { background: rgba(0,212,170,0.10); border: 1px solid rgba(0,212,170,0.25); color: #b0e0d0; }
-  .tb-bear { background: rgba(255,165,0,0.10); border: 1px solid rgba(255,165,0,0.25); color: #f0d8a0; }
-  .tb-golden { background: rgba(255,215,0,0.10); border: 1px solid rgba(255,215,0,0.30); color: #f0e0a0; }
-  .tb-death { background: rgba(255,50,50,0.12); border: 1px solid rgba(255,50,50,0.30); color: #f0b0b0; }
-  .tb-class { background: rgba(138,43,226,0.10); border: 1px solid rgba(138,43,226,0.25); color: #d0b0f0; }
-  .tb-low { background: rgba(100,100,100,0.10); border: 1px solid rgba(100,100,100,0.20); color: #999; }
+  .showcase-label { text-align: center; margin-top: 8px; }
+  .showcase-label .sl-group { font-size: 9px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; margin-bottom: 1px; }
+  .showcase-label .sl-title { font-size: 11px; font-weight: 700; color: #ccc; }
 
-  /* Command bubble */
-  .cmd-bubble { padding: 14px 16px; border-radius: 12px; background: rgba(0,150,255,0.06); border: 1px solid rgba(0,150,255,0.15); font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 12.5px; line-height: 1.85; word-wrap: break-word; color: #b0c4d8; }
-  .cmd-bubble code { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; background: rgba(0,150,255,0.12); padding: 1px 5px; border-radius: 3px; font-size: 12px; }
+  /* Compact bubbles for 3-col */
+  .mini-bubble { padding: 8px 8px; border-radius: 8px; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 10px; line-height: 1.75; word-wrap: break-word; }
+  .mini-bubble code { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; background: rgba(0,212,170,0.12); padding: 1px 4px; border-radius: 2px; font-size: 9.5px; }
+  .mb-golden { background: rgba(255,215,0,0.08); border: 1px solid rgba(255,215,0,0.25); color: #f0e0a0; }
+  .mb-settings { background: rgba(0,150,255,0.06); border: 1px solid rgba(0,150,255,0.15); color: #b0c4d8; }
+  .mb-report { background: rgba(0,212,170,0.06); border: 1px solid rgba(0,212,170,0.15); color: #c8d6e5; }
+  .mb-report .r-label { color: #666; }
 
-  /* Dots */
-  .dots { display: flex; justify-content: center; gap: 6px; margin-top: 14px; flex-wrap: wrap; }
-  .dot { width: 6px; height: 6px; border-radius: 50%; background: #333; cursor: pointer; transition: all 0.25s; }
-  .dot.active { background: #00d4aa; width: 18px; border-radius: 4px; }
+  /* ===== WHAT WE TRACK ===== */
+  .track { margin: 36px 0 8px; }
+  .track h2 { font-size: 11px; color: #555; margin-bottom: 14px; text-align: center; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+  .track-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .track-item { background: #10101a; border-radius: 10px; padding: 14px 10px; text-align: center; border: 1px solid #1e1e30; }
+  .track-item .ti-icon { font-size: 24px; margin-bottom: 6px; display: block; }
+  .track-item .ti-name { font-size: 12px; font-weight: 600; color: #ccc; }
+  .track-item .ti-desc { font-size: 10px; color: #666; margin-top: 3px; line-height: 1.4; }
 
-  /* Arrows */
-  .arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); border: 1px solid #333; color: #aaa; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; font-size: 18px; transition: all 0.2s; backdrop-filter: blur(4px); }
-  .arrow:hover { background: rgba(0,212,170,0.2); color: #fff; border-color: #00d4aa; }
-  .arrow.prev { left: 8px; }
-  .arrow.next { right: 8px; }
-
-  /* Legend */
-  .slide-legend { text-align: center; padding: 10px 12px 0; }
-  .slide-group { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #00d4aa; margin-bottom: 2px; font-weight: 700; }
-  .slide-title { font-size: 13px; font-weight: 700; color: #ccc; }
-  .slide-desc { font-size: 11px; color: #666; margin-top: 3px; line-height: 1.5; }
-
-  .swipe-hint { text-align: center; font-size: 10px; color: #444; margin-top: 8px; animation: fadeOut 3s 5s forwards; }
-  @keyframes fadeOut { to { opacity: 0; } }
-
-  /* ===== PHILOSOPHY ===== */
-  .philosophy { margin-top: 36px; background: #0d0d15; border-radius: 12px; padding: 20px; border: 1px solid #1a1a2a; }
-  .philosophy h3 { font-size: 13px; color: #00d4aa; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1.5px; }
-  .philosophy p { font-size: 12px; color: #777; line-height: 1.7; }
-  .philosophy .highlight { color: #00d4aa; font-weight: 700; }
-
-  /* ===== TREND HIERARCHY ===== */
-  .hierarchy { margin-top: 36px; }
-  .hierarchy h2 { font-size: 12px; color: #555; margin-bottom: 14px; text-align: center; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
-  .hier-item { background: #12121c; border-radius: 10px; padding: 14px 16px; margin-bottom: 8px; border: 1px solid #1e1e30; display: flex; align-items: center; gap: 12px; }
-  .hier-priority { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 3px 8px; border-radius: 4px; min-width: 70px; text-align: center; }
+  /* ===== PRIORITY HIERARCHY ===== */
+  .hierarchy { margin: 36px 0 8px; }
+  .hierarchy h2 { font-size: 11px; color: #555; margin-bottom: 14px; text-align: center; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+  .hier-item { background: #10101a; border-radius: 10px; padding: 12px 14px; margin-bottom: 6px; border: 1px solid #1e1e30; display: flex; align-items: center; gap: 10px; }
+  .hier-priority { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 3px 7px; border-radius: 4px; min-width: 64px; text-align: center; }
   .p-critical { background: rgba(255,50,50,0.15); color: #ff6060; border: 1px solid rgba(255,50,50,0.3); }
   .p-high { background: rgba(255,165,0,0.15); color: #ffa500; border: 1px solid rgba(255,165,0,0.3); }
   .p-medium { background: rgba(255,215,0,0.12); color: #ffd700; border: 1px solid rgba(255,215,0,0.25); }
   .p-low { background: rgba(100,100,100,0.12); color: #888; border: 1px solid rgba(100,100,100,0.2); }
   .p-context { background: rgba(0,150,255,0.10); color: #6090ff; border: 1px solid rgba(0,150,255,0.2); }
   .hier-body { flex: 1; }
-  .hier-body .label { font-size: 13px; font-weight: 600; color: #ccc; }
-  .hier-body .desc { font-size: 11px; color: #666; margin-top: 2px; }
-
-  /* ===== CLASSIFICATIONS ===== */
-  .classifications { margin-top: 36px; }
-  .classifications h2 { font-size: 12px; color: #555; margin-bottom: 14px; text-align: center; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
-  .class-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .class-item { background: #12121c; border-radius: 10px; padding: 12px; border: 1px solid #1e1e30; }
-  .class-item .emoji { font-size: 20px; margin-bottom: 4px; }
-  .class-item .name { font-size: 12px; font-weight: 600; color: #ccc; }
-  .class-item .cond { font-size: 10px; color: #666; margin-top: 3px; line-height: 1.4; }
+  .hier-body .label { font-size: 12px; font-weight: 600; color: #ccc; }
+  .hier-body .desc { font-size: 10px; color: #666; margin-top: 1px; }
 
   /* ===== PRICING ===== */
-  .pricing { margin-top: 36px; }
-  .pricing h2 { font-size: 12px; color: #555; margin-bottom: 14px; text-align: center; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
-  .price-card { background: #12121c; border-radius: 12px; padding: 18px; margin-bottom: 10px; border: 1px solid #1e1e30; }
-  .price-card.featured { border-color: #00d4aa; }
-  .price-card .tier { font-size: 15px; font-weight: 700; margin-bottom: 2px; }
-  .price-card .price { font-size: 22px; color: #00d4aa; font-weight: 700; margin-bottom: 6px; }
-  .price-card .details { font-size: 11px; color: #777; line-height: 1.7; }
+  .pricing { margin: 36px 0 8px; }
+  .pricing h2 { font-size: 11px; color: #555; margin-bottom: 14px; text-align: center; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; align-items: start; }
+  .price-card { background: #10101a; border-radius: 12px; padding: 16px 12px; text-align: center; border: 1px solid #1e1e30; }
+  .price-card.free-card { border-color: #00d4aa; background: rgba(0,212,170,0.04); padding: 20px 12px; }
+  .price-card .tier { font-size: 11px; font-weight: 700; margin-bottom: 6px; color: #999; }
+  .price-card.free-card .tier { color: #00d4aa; font-size: 12px; }
+  .price-card .price { font-size: 20px; color: #00d4aa; font-weight: 700; margin-bottom: 8px; }
+  .price-card.free-card .price { font-size: 28px; }
+  .price-card .price small { font-size: 11px; font-weight: 400; color: #666; }
+  .price-card .details { font-size: 10px; color: #666; line-height: 1.6; }
 
-  /* ===== CTA ===== */
-  .cta { margin-top: 32px; text-align: center; }
-  .cta a { display: inline-block; background: linear-gradient(135deg, #00d4aa, #0099ff); color: #000; font-weight: 700; padding: 15px 36px; border-radius: 12px; text-decoration: none; font-size: 15px; transition: transform 0.2s, box-shadow 0.2s; }
-  .cta a:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(0,212,170,0.3); }
-  .cta p { margin-top: 10px; font-size: 11px; color: #555; }
+  .price-free-btn { display: block; margin: 16px auto 0; background: linear-gradient(135deg, #00d4aa, #0099ff); color: #000; font-weight: 700; padding: 14px 44px; border-radius: 14px; text-decoration: none; font-size: 15px; text-align: center; transition: transform 0.2s, box-shadow 0.2s; max-width: 240px; }
+  .price-free-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,212,170,0.3); }
+  .price-micro { text-align: center; margin-top: 10px; font-size: 11px; color: #555; }
+
+  /* ===== CLASSIFICATIONS ===== */
+  .classifications { margin: 36px 0 8px; }
+  .classifications h2 { font-size: 11px; color: #555; margin-bottom: 14px; text-align: center; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+  .class-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .class-item { background: #10101a; border-radius: 10px; padding: 10px 8px; text-align: center; border: 1px solid #1e1e30; }
+  .class-item .emoji { font-size: 18px; margin-bottom: 3px; }
+  .class-item .name { font-size: 11px; font-weight: 600; color: #ccc; }
+
+  /* ===== FINAL CTA ===== */
+  .final-cta { margin: 36px 0 0; text-align: center; }
+  .final-cta a { display: inline-block; background: linear-gradient(135deg, #00d4aa, #0099ff); color: #000; font-weight: 700; padding: 16px 48px; border-radius: 14px; text-decoration: none; font-size: 16px; transition: transform 0.2s, box-shadow 0.2s; }
+  .final-cta a:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,212,170,0.3); }
+  .final-cta p { margin-top: 10px; font-size: 11px; color: #555; }
+
+  /* ===== FOOTER ===== */
+  .footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #1a1a2a; }
+  .footer p { font-size: 10px; color: #444; line-height: 1.6; }
 </style>
 </head>
 <body>
 <div class="container">
 
+  <!-- ═══════════ HERO ═══════════ -->
   <div class="header">
     <h1>🦅 Crypto Alert Bot</h1>
-    <p>Trend intelligence for crypto markets.<br>Only fires when market structure changes.</p>
-    <div class="tagline">Signal, not noise.</div>
+    <div class="subheadline">
+      Stop staring at charts.<br>
+      Get instant, high-signal Telegram alerts only when critical market trends actually shift.
+      <strong style="color:#00d4aa;">Zero spam.</strong>
+    </div>
+    <div class="tagline">Signal, Not Noise</div>
   </div>
 
-  <!-- ===== CAROUSEL ===== -->
-  <div class="carousel-wrap" id="carouselWrap">
-    <button class="arrow prev" onclick="slide(-1)" aria-label="Previous">◀</button>
+  <div class="hero-cta">
+    <a href="https://t.me/crypto_alert_maxbot" target="_blank">Try the Bot — It's Free →</a>
+    <p>⚡️ Sets up in less than 60 seconds. No registration required.</p>
+  </div>
 
-    <div class="carousel" id="carousel">
-
-      <!-- ═══ SLIDE 1: /check — Daily Report ═══ -->
-      <div class="slide">
-        <div class="telegram-frame">
-          <div class="telegram-header">
-            <div class="avatar">🦅</div>
-            <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
-          </div>
-          <div class="chat-area">
-<div class="report-bubble">
-📊  <b>Daily Report — BTCUSDT</b><br>
-━━━━━━━━━━━━━━━━━━━━<br><br>
-Price:  <code>$92,000.00</code><br><br>
-Market Structure:  Bullish 🟢<br><br>
-Long-Term Trend:<br>Bullish ✅<br><br>
-Medium-Term Trend:<br>Bullish ✅<br><br>
-Short-Term Momentum:<br>Bearish ⚠️<br><br>
-Market State:  Pullback Within Uptrend<br><br>
-Volume:  +63%<br><br>
-Risk Level:  Moderate<br>
-━━━━━━━━━━━━━━━━━━━━<br>
-⚠️  <i>Not financial advice. Data only.</i>
-</div>
-          </div>
-        </div>
+  <!-- ═══════════ HOW IT WORKS (1-2-3) ═══════════ -->
+  <div class="hiw">
+    <h2>Get Started in 3 Steps</h2>
+    <div class="hiw-row">
+      <div class="hiw-step">
+        <div class="num">1</div>
+        <div class="step-title">Open Telegram</div>
+        <div class="step-desc">Search @crypto_alert_maxbot</div>
       </div>
-
-      <!-- ═══ SLIDE 2: HIGH — EMA 21×50 Bullish ═══ -->
-      <div class="slide">
-        <div class="telegram-frame">
-          <div class="telegram-header">
-            <div class="avatar">🦅</div>
-            <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
-          </div>
-          <div class="chat-area">
-<div class="trend-bubble tb-bull">
-🚨  <b>HIGH PRIORITY</b><br><br>
-<b>BTCUSDT</b><br><br>
-Trend Shift Detected<br><br>
-Long-Term Trend:<br>Bullish ✅<br><br>
-Medium-Term Trend:<br>Bullish ✅<br><br>
-Short-Term Momentum:<br>Bullish ✅<br><br>
-Market Classification:<br>Strong Bullish 🟢🟢<br><br>
-Trigger:<br>EMA 21 crossed above EMA 50<br><br>
-Interpretation:<br>Medium-term trend now aligns with the long-term uptrend.<br>
-━━━━━━━━━━━━━━━━━━━━<br>
-⚠️  <i>Not financial advice. Data only.</i>
-</div>
-          </div>
-        </div>
+      <div class="hiw-step">
+        <div class="num">2</div>
+        <div class="step-title">Pick Your Coins</div>
+        <div class="step-desc">Set alerts for BTC, ETH, SOL &amp; more</div>
       </div>
-
-      <!-- ═══ SLIDE 3: HIGH — EMA 21×50 Bearish ═══ -->
-      <div class="slide">
-        <div class="telegram-frame">
-          <div class="telegram-header">
-            <div class="avatar">🦅</div>
-            <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
-          </div>
-          <div class="chat-area">
-<div class="trend-bubble tb-bear">
-🚨  <b>HIGH PRIORITY</b><br><br>
-<b>BTCUSDT</b><br><br>
-Trend Shift Detected<br><br>
-Long-Term Trend:<br>Bullish ✅<br><br>
-Medium-Term Trend:<br>Bearish ⚠️<br><br>
-Short-Term Momentum:<br>Bearish ⚠️<br><br>
-Market Classification:<br>Transition / Weakening 🟡<br><br>
-Trigger:<br>EMA 21 crossed below EMA 50<br><br>
-Interpretation:<br>Medium-term trend now opposes the long-term trend.<br>
-━━━━━━━━━━━━━━━━━━━━<br>
-⚠️  <i>Not financial advice. Data only.</i>
-</div>
-          </div>
-        </div>
+      <div class="hiw-step">
+        <div class="num">3</div>
+        <div class="step-title">Get Alerts</div>
+        <div class="step-desc">Instant pings when trends shift</div>
       </div>
+    </div>
+  </div>
 
-      <!-- ═══ SLIDE 4: CRITICAL — Golden Cross ═══ -->
-      <div class="slide">
+  <!-- ═══════════ 3-COLUMN ALERT SHOWCASE ═══════════ -->
+  <div class="alert-showcase">
+    <h2>3 Ways the Bot Protects You</h2>
+    <div class="alert-cols">
+
+      <!-- COL 1: Critical Priority -->
+      <div class="alert-col">
         <div class="telegram-frame">
           <div class="telegram-header">
             <div class="avatar">🦅</div>
             <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
           </div>
           <div class="chat-area">
-<div class="trend-bubble tb-golden">
+<div class="mini-bubble mb-golden">
 🚨  <b>CRITICAL PRIORITY</b><br><br>
-<b>BTCUSDT</b><br><br>
+<b>BTCUSDT</b><br>
 Trend Shift Detected<br><br>
-Long-Term Trend:<br>Bullish ✅<br><br>
-Medium-Term Trend:<br>Bullish ✅<br><br>
-Short-Term Momentum:<br>Bullish ✅<br><br>
-Market Classification:<br>Strong Bullish 🟢🟢<br><br>
-Trigger:<br>EMA 50 crossed above EMA 200<br><br>
-Interpretation:<br>Golden cross. Long-term trend confirmed bullish. Major structural shift.<br>
-━━━━━━━━━━━━━━━━━━━━<br>
-⚠️  <i>Not financial advice. Data only.</i>
-</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ═══ SLIDE 5: CRITICAL — Death Cross ═══ -->
-      <div class="slide">
-        <div class="telegram-frame">
-          <div class="telegram-header">
-            <div class="avatar">🦅</div>
-            <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
-          </div>
-          <div class="chat-area">
-<div class="trend-bubble tb-death">
-🚨  <b>CRITICAL PRIORITY</b><br><br>
-<b>BTCUSDT</b><br><br>
-Trend Shift Detected<br><br>
-Long-Term Trend:<br>Bearish ⚠️<br><br>
-Medium-Term Trend:<br>Bearish ⚠️<br><br>
-Short-Term Momentum:<br>Bearish ⚠️<br><br>
-Market Classification:<br>Strong Bearish 🔴🔴<br><br>
+Long-Term:<br>Bearish ⚠️<br>
+Medium-Term:<br>Bearish ⚠️<br>
+Short-Term:<br>Bearish ⚠️<br><br>
+Classification:<br>Strong Bearish 🔴🔴<br><br>
 Trigger:<br>EMA 50 crossed below EMA 200<br><br>
-Interpretation:<br>Death cross. Long-term trend confirmed bearish. Major structural shift.<br>
-━━━━━━━━━━━━━━━━━━━━<br>
-⚠️  <i>Not financial advice. Data only.</i>
+Interpretation:<br>Death cross. Long-term trend confirmed bearish.
 </div>
           </div>
         </div>
+        <div class="showcase-label">
+          <div class="sl-group" style="color:#ffa500;">CRITICAL</div>
+          <div class="sl-title">Golden Cross / Death Cross</div>
+        </div>
       </div>
 
-      <!-- ═══ SLIDE 6: MEDIUM — Classification Change ═══ -->
-      <div class="slide">
+      <!-- COL 2: Active Alerts Manager -->
+      <div class="alert-col">
         <div class="telegram-frame">
           <div class="telegram-header">
             <div class="avatar">🦅</div>
             <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
           </div>
           <div class="chat-area">
-<div class="trend-bubble tb-class">
-🚨  <b>MEDIUM PRIORITY</b><br><br>
-<b>ETHUSDT</b><br><br>
-Trend Shift Detected<br><br>
-Long-Term Trend:<br>Bullish ✅<br><br>
-Medium-Term Trend:<br>Bearish ⚠️<br><br>
-Short-Term Momentum:<br>Bullish ✅<br><br>
-Market Classification:<br>Transition / Weakening 🟡<br><br>
-Trigger:<br>Market structure changed to Transition / Weakening 🟡<br><br>
-Interpretation:<br>Uptrend losing momentum — medium-term crossed below long-term.<br>
-━━━━━━━━━━━━━━━━━━━━<br>
-⚠️  <i>Not financial advice. Data only.</i>
-</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ═══ SLIDE 7: LOW — Price Alert ═══ -->
-      <div class="slide">
-        <div class="telegram-frame">
-          <div class="telegram-header">
-            <div class="avatar">🦅</div>
-            <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
-          </div>
-          <div class="chat-area">
-<div class="trend-bubble tb-low">
-💰  <b>PRICE ALERT (LOW)</b><br>
-━━━━━━━━━━━━━━━━━━━━<br><br>
-BTCUSDT below <code>$85,000.00</code><br>
-Current: <code>$84,340.20</code>
-</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ═══ SLIDE 8: /help ═══ -->
-      <div class="slide">
-        <div class="telegram-frame">
-          <div class="telegram-header">
-            <div class="avatar">🦅</div>
-            <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
-          </div>
-          <div class="chat-area">
-<div class="cmd-bubble" style="font-size:12px;">
-🦅  <b>Crypto Alert Bot</b><br>
-━━━━━━━━━━━━━━━━━━━━<br><br>
-📌  <b>Trend Intelligence</b> — only fires on meaningful shifts:<br>
-• EMA 21 × EMA 50 → <b>HIGH</b><br>
-• EMA 50 × EMA 200 → <b>CRITICAL</b><br>
-• Market structure changes → <b>MEDIUM</b><br><br>
-EMA 9/21 crosses are tracked for context only.<br>
-They never trigger standalone alerts.<br>
-━━━━━━━━━━━━━━━━━━━━<br><br>
-🔹 <b>Check Trend</b><br>
-<code>/check &lt;SYMBOL&gt;</code> → <code>/check BTCUSDT</code><br><br>
-🔹 <b>Set Alerts</b><br>
-<code>/setprice</code> <code>/setvolume</code> <code>/setrsi</code><br>
-<code>/setbb</code> <code>/setmacross</code><br><br>
-🔹 <b>Manage</b><br>
-<code>/mysettings</code> | <code>/remove</code> | <code>/help</code><br>
-━━━━━━━━━━━━━━━━━━━━<br>
-<i>Trend-first • CoinGecko</i>
-</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ═══ SLIDE 9: /mysettings ═══ -->
-      <div class="slide">
-        <div class="telegram-frame">
-          <div class="telegram-header">
-            <div class="avatar">🦅</div>
-            <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
-          </div>
-          <div class="chat-area">
-<div class="cmd-bubble">
-⚙️  <b>Active Alerts</b><br>
-━━━━━━━━━━━━━━━━━━━━<br><br>
+<div class="mini-bubble mb-settings">
+⚙️  <b>Active Alerts</b><br><br>
 📉  <b>MA Cross</b><br>
-&nbsp;&nbsp;• BTCUSDT: EMA 21 × SMA 50<br><br>
+&nbsp;&nbsp;• BTCUSDT:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;EMA 21 × SMA 50<br><br>
 💰  <b>Price</b><br>
-&nbsp;&nbsp;• SOLUSDT: Above <code>$250</code>, Below <code>$200</code><br>
-━━━━━━━━━━━━━━━━━━━━<br>
-<code>/remove &lt;SYM&gt;</code> to delete.
+&nbsp;&nbsp;• SOLUSDT:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Above <code>$250</code><br>
+&nbsp;&nbsp;&nbsp;&nbsp;Below <code>$200</code><br><br>
+<code>/remove &lt;SYM&gt;</code><br>to delete.
 </div>
           </div>
+        </div>
+        <div class="showcase-label">
+          <div class="sl-group" style="color:#6090ff;">MANAGE</div>
+          <div class="sl-title">Active Alerts Manager</div>
+        </div>
+      </div>
+
+      <!-- COL 3: Daily Report Overview -->
+      <div class="alert-col">
+        <div class="telegram-frame">
+          <div class="telegram-header">
+            <div class="avatar">🦅</div>
+            <div><div class="name">Crypto Alert Bot</div><div class="status">online</div></div>
+          </div>
+          <div class="chat-area">
+<div class="mini-bubble mb-report">
+📊  <b>Daily Report — BTCUSDT</b><br><br>
+Price:  <code>$92,000.00</code><br><br>
+Market Structure:<br>Bullish 🟢<br><br>
+Long-Term: Bullish ✅<br>
+Medium-Term: Bullish ✅<br>
+Short-Term: Bearish ⚠️<br><br>
+Market State:<br>Pullback Within Uptrend<br>
+Volume: +63%<br>
+Risk: Moderate
+</div>
+          </div>
+        </div>
+        <div class="showcase-label">
+          <div class="sl-group" style="color:#00d4aa;">ON-DEMAND</div>
+          <div class="sl-title">Daily Report Overview</div>
         </div>
       </div>
 
     </div>
-
-    <button class="arrow next" onclick="slide(1)" aria-label="Next">▶</button>
   </div>
 
-  <div class="dots" id="dots"></div>
-  <div class="swipe-hint">← swipe or tap arrows →</div>
-
-  <div class="slide-legend" id="slideLegend">
-    <div class="slide-group" id="slideGroup"></div>
-    <div class="slide-title" id="slideTitle"></div>
-    <div class="slide-desc" id="slideDesc"></div>
+  <!-- ═══════════ WHAT WE TRACK ═══════════ -->
+  <div class="track">
+    <h2>What We Track</h2>
+    <div class="track-grid">
+      <div class="track-item">
+        <span class="ti-icon">💰</span>
+        <div class="ti-name">Price</div>
+        <div class="ti-desc">Above / below thresholds</div>
+      </div>
+      <div class="track-item">
+        <span class="ti-icon">📦</span>
+        <div class="ti-name">Volume</div>
+        <div class="ti-desc">Spike detection vs 20d avg</div>
+      </div>
+      <div class="track-item">
+        <span class="ti-icon">📈</span>
+        <div class="ti-name">RSI</div>
+        <div class="ti-desc">Overbought / oversold</div>
+      </div>
+      <div class="track-item">
+        <span class="ti-icon">📐</span>
+        <div class="ti-name">Bollinger</div>
+        <div class="ti-desc">Band touch alerts</div>
+      </div>
+      <div class="track-item">
+        <span class="ti-icon">📉</span>
+        <div class="ti-name">MA Cross</div>
+        <div class="ti-desc">EMA 21×50, 50×200</div>
+      </div>
+      <div class="track-item">
+        <span class="ti-icon">🔍</span>
+        <div class="ti-name">On-Demand</div>
+        <div class="ti-desc">/check any symbol anytime</div>
+      </div>
+    </div>
   </div>
 
-  <!-- ===== PHILOSOPHY ===== -->
-  <div class="philosophy">
-    <h3>Smart Trend Detection</h3>
-    <p>The bot filters short-term market noise. EMA 9/21 crosses are tracked for context but <span class="highlight">never trigger standalone alerts</span>.</p>
-    <p style="margin-top:8px;">Alerts are generated only when:</p>
-    <p style="margin-top:4px;">• <span class="highlight">Medium-term trends shift</span> (EMA 21 × 50)</p>
-    <p>• <span class="highlight">Long-term trends reverse</span> (EMA 50 × 200)</p>
-    <p>• <span class="highlight">Market structure changes</span> (classification shift)</p>
-    <p style="margin-top:8px;">Not every crossover matters. Only the ones that change the trend.</p>
+  <!-- ═══════════ PRICING ═══════════ -->
+  <div class="pricing">
+    <h2>Pricing</h2>
+    <div class="pricing-grid">
+      <div class="price-card free-card">
+        <div class="tier">🆓 Free Trial</div>
+        <div class="price">$0</div>
+        <div class="details">Use @crypto_alert_maxbot<br>All alert priorities<br>No limits</div>
+      </div>
+      <div class="price-card">
+        <div class="tier">🤖 Custom Bot</div>
+        <div class="price">$25–50</div>
+        <div class="details">Your own bot token<br>Custom config<br>Setup in 24h</div>
+      </div>
+      <div class="price-card">
+        <div class="tier">📡 Managed</div>
+        <div class="price">$15<small>/mo</small></div>
+        <div class="details">Hosted &amp; monitored<br>Priority support<br>Custom indicators</div>
+      </div>
+    </div>
+
+    <a href="https://t.me/crypto_alert_maxbot" target="_blank" class="price-free-btn">Try the Bot — It's Free →</a>
+    <p class="price-micro">⚡️ Sets up in less than 60 seconds. No registration required.</p>
   </div>
 
-  <!-- ===== TREND HIERARCHY ===== -->
+  <!-- ═══════════ CLASSIFICATIONS ═══════════ -->
+  <div class="classifications">
+    <h2>Market Classifications</h2>
+    <div class="class-grid">
+      <div class="class-item"><div class="emoji">🟢🟢</div><div class="name">Strong Bullish</div></div>
+      <div class="class-item"><div class="emoji">🟢</div><div class="name">Bullish</div></div>
+      <div class="class-item"><div class="emoji">🟡</div><div class="name">Transition</div></div>
+      <div class="class-item"><div class="emoji">🟠</div><div class="name">Potential Reversal</div></div>
+      <div class="class-item"><div class="emoji">🔴</div><div class="name">Bearish</div></div>
+      <div class="class-item"><div class="emoji">🔴🔴</div><div class="name">Strong Bearish</div></div>
+    </div>
+  </div>
+
+  <!-- ═══════════ PRIORITY HIERARCHY ═══════════ -->
   <div class="hierarchy">
     <h2>Alert Priority</h2>
     <div class="hier-item">
       <span class="hier-priority p-critical">CRITICAL</span>
-      <div class="hier-body"><div class="label">EMA 50 × EMA 200</div><div class="desc">Golden cross / Death cross. Long-term trend reversal.</div></div>
+      <div class="hier-body"><div class="label">EMA 50 × EMA 200</div><div class="desc">Golden cross / Death cross. Long-term reversal.</div></div>
     </div>
     <div class="hier-item">
       <span class="hier-priority p-high">HIGH</span>
@@ -388,7 +334,7 @@ They never trigger standalone alerts.<br>
     </div>
     <div class="hier-item">
       <span class="hier-priority p-low">LOW</span>
-      <div class="hier-body"><div class="label">Price / RSI / Volume / BB</div><div class="desc">Indicator alerts. Suppressed when trend alerts fire.</div></div>
+      <div class="hier-body"><div class="label">Price / RSI / Volume / BB</div><div class="desc">Indicator alerts. Suppressed when trend fires.</div></div>
     </div>
     <div class="hier-item">
       <span class="hier-priority p-context">CONTEXT</span>
@@ -396,95 +342,19 @@ They never trigger standalone alerts.<br>
     </div>
   </div>
 
-  <!-- ===== CLASSIFICATIONS ===== -->
-  <div class="classifications">
-    <h2>Market Classifications</h2>
-    <div class="class-grid">
-      <div class="class-item"><div class="emoji">🟢🟢</div><div class="name">Strong Bullish</div><div class="cond">9&gt;21 &gt;50 &gt;200</div></div>
-      <div class="class-item"><div class="emoji">🟢</div><div class="name">Bullish</div><div class="cond">21&gt;50 &gt;200, 9&lt;21</div></div>
-      <div class="class-item"><div class="emoji">🟡</div><div class="name">Transition</div><div class="cond">21&lt;50, 50&gt;200</div></div>
-      <div class="class-item"><div class="emoji">🟠</div><div class="name">Potential Reversal</div><div class="cond">21&gt;50, 50&lt;200</div></div>
-      <div class="class-item"><div class="emoji">🔴</div><div class="name">Bearish</div><div class="cond">21&lt;50 &lt;200, 9&gt;21</div></div>
-      <div class="class-item"><div class="emoji">🔴🔴</div><div class="name">Strong Bearish</div><div class="cond">9&lt;21 &lt;50 &lt;200</div></div>
-    </div>
+  <!-- ═══════════ FINAL CTA ═══════════ -->
+  <div class="final-cta">
+    <a href="https://t.me/crypto_alert_maxbot" target="_blank">Try the Bot — It's Free →</a>
+    <p>⚡️ Sets up in less than 60 seconds. No registration required.</p>
   </div>
 
-  <!-- ===== PRICING ===== -->
-  <div class="pricing">
-    <h2>Pricing</h2>
-    <div class="price-card">
-      <div class="tier">🆓 Free Trial</div>
-      <div class="price">$0</div>
-      <div class="details">Use @crypto_alert_maxbot on Telegram<br>All alert priorities included</div>
-    </div>
-    <div class="price-card featured">
-      <div class="tier">🤖 Custom Bot</div>
-      <div class="price">$25–50</div>
-      <div class="details">Your own Telegram bot with your token<br>Custom trend configuration<br>Setup in 24 hours</div>
-    </div>
-    <div class="price-card">
-      <div class="tier">📡 Managed Service</div>
-      <div class="price">$15/mo</div>
-      <div class="details">Hosted & monitored bot<br>Priority support<br>Custom indicators on request</div>
-    </div>
-  </div>
-
-  <!-- ===== CTA ===== -->
-  <div class="cta">
-    <a href="https://t.me/crypto_alert_maxbot" target="_blank">Try the Bot →</a>
-    <p>Free to try. No signup needed.</p>
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <div class="footer">
+    <p>Crypto Alert Bot — Trend Intelligence Engine<br>
+    Powered by CoinGecko • EMA Trend-First Architecture<br>
+    ⚠️ Not financial advice. Data only.</p>
   </div>
 
 </div>
-
-<script>
-const slidesData = [
-  { group: "TREND CHECK", title: "📊 /check BTCUSDT", desc: "Trend-centric daily report — market structure, 3 timeframes, market state, volume, risk level." },
-  { group: "HIGH PRIORITY", title: "🟢 EMA 21 × 50 Bullish Cross", desc: "Medium-term trend turns bullish. Primary alert source." },
-  { group: "HIGH PRIORITY", title: "🟡 EMA 21 × 50 Bearish Cross", desc: "Medium-term trend turns bearish. EMA 9/21 noise is ignored." },
-  { group: "CRITICAL PRIORITY", title: "🌟 Golden Cross", desc: "EMA 50 crosses above EMA 200. Long-term trend confirmed bullish." },
-  { group: "CRITICAL PRIORITY", title: "💀 Death Cross", desc: "EMA 50 crosses below EMA 200. Long-term trend confirmed bearish." },
-  { group: "MEDIUM PRIORITY", title: "🔄 Classification Change", desc: "Market structure shifts between 6 states. No repetitive alerts." },
-  { group: "LOW PRIORITY", title: "💰 Price / RSI / Volume / BB", desc: "Indicator alerts. Suppressed when trend alerts fire." },
-  { group: "GETTING STARTED", title: "🦅 /help", desc: "Trend-first alert system. EMA 9/21 never triggers standalone alerts." },
-  { group: "MANAGE", title: "⚙️ /mysettings", desc: "View all active alerts. Trend pairs shown with EMA periods." }
-];
-
-const carousel = document.getElementById('carousel');
-const dotsContainer = document.getElementById('dots');
-const slideGroup = document.getElementById('slideGroup');
-const slideTitle = document.getElementById('slideTitle');
-const slideDesc = document.getElementById('slideDesc');
-const wrap = document.getElementById('carouselWrap');
-const total = slidesData.length;
-let current = 0;
-let autoTimer = null;
-let touchStartX = 0;
-
-for (let i = 0; i < total; i++) {
-  const d = document.createElement('div');
-  d.className = 'dot' + (i === 0 ? ' active' : '');
-  d.onclick = () => goTo(i);
-  dotsContainer.appendChild(d);
-}
-
-function updateUI() {
-  carousel.style.transform = `translateX(-${current * 100}%)`;
-  document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
-  slideGroup.textContent = slidesData[current].group;
-  slideTitle.textContent = slidesData[current].title;
-  slideDesc.textContent = slidesData[current].desc;
-}
-
-function slide(dir) { current = (current + dir + total) % total; updateUI(); resetAuto(); }
-function goTo(idx) { current = idx; updateUI(); resetAuto(); }
-function resetAuto() { clearInterval(autoTimer); autoTimer = setInterval(() => { current = (current + 1) % total; updateUI(); }, 4500); }
-
-wrap.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive: true});
-wrap.addEventListener('touchend', e => { const diff = touchStartX - e.changedTouches[0].clientX; if (Math.abs(diff) > 40) slide(diff > 0 ? 1 : -1); }, {passive: true});
-
-updateUI();
-autoTimer = setInterval(() => { current = (current + 1) % total; updateUI(); }, 4500);
-</script>
 </body>
 </html>
